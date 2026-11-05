@@ -1,0 +1,18 @@
+# Install into the Python environment already used by ComfyUI.
+# DO NOT install another runtime; do NOT downgrade/replace torch or CUDA.
+# Do NOT install yue2-infer: ComfyUI's native YuE2 is reused.
+# Optional: if OpenAI Whisper dependency resolution changes PyTorch, use
+# ComfyUI Manager's dependency installer with your existing Torch pinned.
+numpy>=1.26,<3
+scipy>=1.12
+soundfile>=0.12
+safetensors>=0.4
+huggingface-hub>=0.32,<2
+transformers>=4.53.2,<5
+librosa>=0.10.2
+openai-whisper>=20250625
+
+# torch and torchaudio are provided by ComfyUI; never force/reinstall them here.
+
+# Optional-quality Italian syllable segmentation with pure-Python fallback.
+pyphen>=0.16,<1

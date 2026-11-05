@@ -123,16 +123,17 @@ def extract_music(lines: list[str]) -> tuple[list[str],str]:
 
 
 def measure_rests(meter: str, default_length: str, count: int) -> str:
-    """Represent N measures of silence in YuE2's native two-voice ABC dialect.
+    """Represent 1–4 measures of silence in YuE2's native two-voice ABC dialect.
 
-    `Z4|` is a four-MEASURE rest. This is the exact representation used in
+    `Z4|` is a four-MEASURE rest. A single measure is `Z|` (not Z1|). This is the representation used in
     the previously verified hand-corrected cover score, unlike four separate
     `z16|` bars. Keep the multi-measure shorthand to preserve section phrases.
     Meter/length are intentionally not used: uppercase Z counts full measures.
     """
-    if count < 1:
-        raise ValueError('Rest measure count must be >= 1')
-    return f'Z{count}|'
+    if not 1 <= count <= 4:
+        raise ValueError('Native YuE2 groups support 1–4 measures; split larger groups before encoding rests')
+    # Z1 and Z5+ are invalid; only one Z / Z2 / Z3 / Z4 per native group.
+    return ('Z' + (str(count) if count > 1 else '') + '|')
 
 
 @dataclass
@@ -192,7 +193,23 @@ def convert_abc(abc: str, lyrics: str = '', *, section_policy: str = 'all_of_res
     if not lyrics_has_words(lyrics):
         report.skipped.append('No lyric words found: an instrumental result may be expected.')
         if strict:raise ValueError('Lyrics are empty or contain only section tags. Add sung lyrics.')
+    # Native parsing is authoritative for bar count and event chronology.
+    # SheetSage compresses multi-measure rests as Z2/Z3/Z4, which are NOT
+    # equivalent to the number of textual `|` separators.
+    from .vendor.yue2_cover_main.yue2_cover.abc_tools import parse_abc, AbcError
+    from .instrumental_mode import _count_measures
+    try:
+        native_before = parse_abc(abc)
+    except AbcError:
+        # Keep the original conversion error behavior for unsupported inputs;
+        # downstream native validation must still reject unparseable scores.
+        native_before = None
     lines=abc.splitlines()
+    # Decide cross-group tie regions atomically before altering any staff.
+    # The original source score is preserved when the whole tied phrase
+    # cannot be converted safely; no emergency tie deletion or note rewrites.
+    from .tie_group_contract import blocked_tie_groups
+    tie_blocked = blocked_tie_groups(lines, section_policy, inst, voc, existing_vocal)
     # Header declarations contain additional arguments; body voice markers are exact V: Vocal / V: Ins.
     out=[]; i=0; section=''; meter='4/4'; length='1/16';
     for line in lines:
@@ -227,6 +244,9 @@ def convert_abc(abc: str, lyrics: str = '', *, section_policy: str = 'all_of_res
             out.extend(lines[i:k]);i=k;continue
         report.groups+=1
         allowed=classify(section,section_policy,voc,inst)
+        if i in tie_blocked:
+            report.skipped.append(f'Section {section!r}, line {i+1}: preserved original cross-group tied phrase atomically.')
+            out.extend(lines[i:k]);i=k;continue
         if not allowed:
             report.instrumental_groups+=1
             out.extend(lines[i:k]);i=k;continue
@@ -239,18 +259,42 @@ def convert_abc(abc: str, lyrics: str = '', *, section_policy: str = 'all_of_res
         if existing_vocal=='preserve' and any(is_note_content(x) for x in vocal_bars):
             report.already_vocal+=1
             out.extend(lines[i:k]);i=k;continue
-        # 'Z4|' is a common SheetSage2 placeholder even for four actual bars.
-        placeholder = len(vocal_bars)==1 and is_only_rests(vocal_bars[0])
-        if len(vocal_bars)!=len(ins_bars):
-            if placeholder:
-                report.expanded_placeholders+=1
-                chords=CHORD.findall(vocal_bars[0])
-                vocal_bars=[(''.join(chords) if ix==0 else '') + 'z1' for ix in range(len(ins_bars))]
-            else:
-                report.skipped.append(f'Section {section!r}, line {i+1}: {len(vocal_bars)} Vocal vs {len(ins_bars)} Ins bars; preserved to avoid corruption.')
-                out.extend(lines[i:k]);i=k;continue
+        vocal_expanded = _count_measures(voc_score)
+        ins_expanded = _count_measures(ins_score)
+        if native_before is not None and vocal_expanded != ins_expanded:
+            raise ValueError(f'Score group at line {i+1} has unequal expanded measures: '
+                             f'Vocal={vocal_expanded}, Ins={ins_expanded}')
         if not any(is_note_content(b) for b in ins_bars):
+            # `overwrite` does not mean deleting an existing singer when the
+            # instrumental staff has nothing to replace it with. This is a
+            # normal YuE2 score, not a failed conversion.
+            if any(is_note_content(b) for b in vocal_bars):
+                report.already_vocal += 1
             report.skipped.append(f'Section {section!r}, line {i+1}: no instrumental notes to promote.')
+            out.extend(lines[i:k]);i=k;continue
+        # Preserve every musical beat, not the textual number of bars.
+        # Transfer the complete instrumental staff if native rests are mixed
+        # (e.g. Vocal Z2|Z| and Ins B16|Z2|). Literal pipe-to-pipe
+        # pairing would change the duration and corrupt the ABC.
+        complex_rests = (len(vocal_bars) != len(ins_bars) or
+                         any(re.fullmatch(r'Z[2-4]', CHORD.sub('', x).strip()) for x in ins_bars))
+        if complex_rests and not any(CHORD.search(x) for x in vocal_bars):
+            transferred = CHORD.sub('', ins_score)
+            out.append(lines[i]); out.extend(voc_meta); out.append(transferred.rstrip('|')+'|')
+            out.append(lines[j]); out.extend(ins_meta)
+            if instrumental_handling == 'keep_original':
+                out.append(ins_score.rstrip('|')+'|')
+            else:
+                out.append(measure_rests(meter,length,ins_expanded))
+            report.converted_groups += 1
+            report.converted_bars += ins_expanded
+            report.expanded_placeholders += 1
+            i=k
+            continue
+        if len(vocal_bars)!=len(ins_bars):
+            # Chorded mixed rest groups need exact event reconstruction; no
+            # silent approximate chord shifts are allowed.
+            report.skipped.append(f'Section {section!r}, line {i+1}: complex chorded rest layout; preserved')
             out.extend(lines[i:k]);i=k;continue
         composed=[]
         for vb, ib in zip(vocal_bars,ins_bars):
@@ -268,16 +312,40 @@ def convert_abc(abc: str, lyrics: str = '', *, section_policy: str = 'all_of_res
         else:
             local_m=next((m.group(2) for x in reversed(voc_meta+ins_meta) if (m:=BODY_META.match(x)) and m.group(1)=='M'),meter)
             local_l=next((m.group(2) for x in reversed(voc_meta+ins_meta) if (m:=BODY_META.match(x)) and m.group(1)=='L'),length)
-            out.append(measure_rests(local_m,local_l,len(ins_bars)))
-        report.converted_groups+=1;report.converted_bars+=len(ins_bars)
+            out.append(measure_rests(local_m,local_l,ins_expanded))
+        report.converted_groups+=1;report.converted_bars+=ins_expanded
         for x in voc_meta+ins_meta:
             if (m:=BODY_META.match(x)):
                 if m.group(1)=='M':meter=m.group(2)
                 if m.group(1)=='L':length=m.group(2)
         i=k
-    if report.converted_groups==0 and report.already_vocal==0:
+    if (report.converted_groups == 0 and report.already_vocal == 0 and
+        not (native_before is not None and native_before.voices['Vocal'].notes)):
         msg='ZERO vocal conversions. No eligible melodic Ins/Vocal groups: see ABC sections, already-empty source, and section policy.'
         report.skipped.append(msg)
         if strict:raise ValueError(report.render())
-    # CRITICAL: default must never silently output another instrumental-only score.
-    return '\n'.join(out).rstrip()+'\n',lyrics,report.render()
+    # Invariant: every native before-score that was valid must remain valid.
+    # This comparison prevents wrong bar counts, key/chord changes or time drift.
+    produced = '\n'.join(out).rstrip()+'\n'
+    if native_before is not None:
+        try:
+            native_after = parse_abc(produced)
+            for staff in ('Vocal', 'Ins'):
+                if native_after.voices[staff].bars != native_before.voices[staff].bars:
+                    raise ValueError(f'ABC conversion changed {staff} bar/meter grid')
+                if native_after.voices[staff].keys != native_before.voices[staff].keys:
+                    raise ValueError(f'ABC conversion changed {staff} key chronology')
+            if native_after.voices['Vocal'].chords != native_before.voices['Vocal'].chords:
+                raise ValueError('ABC conversion changed harmonic chord chronology')
+        except (AbcError, ValueError) as exc:
+            # Transactional guarantee: an already-valid source MUST NOT turn
+            # into an invalid score. The original musical evidence is the
+            # only defensible fallback, not invented notes or deleted ties.
+            # The full reason is surfaced in the conversion report.
+            report.skipped.append('ABC conversion rolled back atomically: '
+                                  f'{type(exc).__name__}: {exc}; original score preserved.')
+            report.converted_groups = 0
+            report.converted_bars = 0
+            report.expanded_placeholders = 0
+            return abc, lyrics, report.render()
+    return produced,lyrics,report.render()

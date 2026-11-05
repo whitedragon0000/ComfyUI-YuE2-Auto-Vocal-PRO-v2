@@ -1,206 +1,29 @@
 {
   "id": "8946c283-b05c-4bea-84dc-f0ea169054c6",
   "revision": 0,
-  "last_node_id": 52,
-  "last_link_id": 118,
+  "last_node_id": 227,
+  "last_link_id": 244,
   "nodes": [
-    {
-      "id": 33,
-      "type": "59dddde1-2d83-4b6e-9c71-1e5cb2d823d6",
-      "pos": [
-        1440,
-        -260
-      ],
-      "size": [
-        485,
-        710
-      ],
-      "flags": {},
-      "order": 4,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "style",
-          "type": "STRING",
-          "widget": {
-            "name": "style"
-          },
-          "link": null
-        },
-        {
-          "name": "lyrics",
-          "type": "STRING",
-          "link": 118
-        },
-        {
-          "name": "max_duration",
-          "type": "FLOAT",
-          "widget": {
-            "name": "max_duration"
-          },
-          "link": null
-        },
-        {
-          "name": "seed",
-          "type": "INT",
-          "widget": {
-            "name": "seed"
-          },
-          "link": 117
-        },
-        {
-          "name": "ckpt_name",
-          "type": "COMBO",
-          "widget": {
-            "name": "ckpt_name"
-          },
-          "link": null
-        },
-        {
-          "name": "audio",
-          "type": "AUDIO",
-          "link": 97
-        },
-        {
-          "name": "audio_encoder_name",
-          "type": "COMBO",
-          "widget": {
-            "name": "audio_encoder_name"
-          },
-          "link": null
-        },
-        {
-          "name": "planning_mode",
-          "type": "COMBO",
-          "widget": {
-            "name": "planning_mode"
-          },
-          "link": null
-        },
-        {
-          "name": "section_policy",
-          "type": "COMBO",
-          "widget": {
-            "name": "section_policy"
-          },
-          "link": null
-        },
-        {
-          "name": "instrumental_handling",
-          "type": "COMBO",
-          "widget": {
-            "name": "instrumental_handling"
-          },
-          "link": null
-        },
-        {
-          "name": "existing_vocal",
-          "type": "COMBO",
-          "widget": {
-            "name": "existing_vocal"
-          },
-          "link": null
-        },
-        {
-          "name": "instrumental_tags",
-          "type": "STRING",
-          "widget": {
-            "name": "instrumental_tags"
-          },
-          "link": null
-        },
-        {
-          "name": "vocal_tags",
-          "type": "STRING",
-          "widget": {
-            "name": "vocal_tags"
-          },
-          "link": null
-        },
-        {
-          "name": "strict",
-          "type": "BOOLEAN",
-          "widget": {
-            "name": "strict"
-          },
-          "link": null
-        }
-      ],
-      "outputs": [
-        {
-          "localized_name": "AUDIO",
-          "name": "AUDIO",
-          "type": "AUDIO",
-          "links": [
-            63
-          ]
-        }
-      ],
-      "properties": {
-        "cnr_id": "comfy-core",
-        "ver": "0.42.0",
-        "ue_properties": {
-          "version": "7.8",
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {}
-        },
-        "previewExposures": [
-          {
-            "name": "$$canvas-image-preview",
-            "sourceNodeId": "8",
-            "sourcePreviewName": "$$canvas-image-preview"
-          }
-        ]
-      },
-      "widgets_values": [
-        "",
-        190,
-        "yue2_3b_int8_convrot.safetensors",
-        "yue2_3b_bf16.safetensors",
-        "sheetsage2_bf16.safetensors",
-        "melody",
-        "all_of_rest",
-        "replace_with_rests",
-        "overwrite",
-        "",
-        "",
-        true
-      ],
-      "widgets_values_named": {
-        "style": "",
-        "max_duration": 190,
-        "seed": "yue2_3b_int8_convrot.safetensors",
-        "ckpt_name": "yue2_3b_bf16.safetensors",
-        "audio_encoder_name": "sheetsage2_bf16.safetensors",
-        "planning_mode": "melody",
-        "section_policy": "all_of_rest",
-        "instrumental_handling": "replace_with_rests",
-        "existing_vocal": "overwrite",
-        "instrumental_tags": "",
-        "vocal_tags": "",
-        "strict": true
-      }
-    },
     {
       "id": 10,
       "type": "SaveAudioAdvanced",
       "pos": [
-        1930,
-        -260
+        5620,
+        95
       ],
       "size": [
-        850,
-        160
+        620,
+        180
       ],
       "flags": {},
-      "order": 5,
+      "order": 30,
       "mode": 0,
       "inputs": [
         {
           "localized_name": "audio",
           "name": "audio",
           "type": "AUDIO",
-          "link": 63
+          "link": 125
         },
         {
           "localized_name": "filename_prefix",
@@ -247,6 +70,7 @@
           "links": []
         }
       ],
+      "title": "Save Final Audio",
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.42.0",
@@ -277,8 +101,8 @@
       "id": 45,
       "type": "LoadAudio",
       "pos": [
-        800,
-        -260
+        60,
+        100
       ],
       "size": [
         590,
@@ -322,10 +146,13 @@
           "name": "AUDIO",
           "type": "AUDIO",
           "links": [
-            97
+            121,
+            149,
+            168
           ]
         }
       ],
+      "title": "01 · Source Song",
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.42.0",
@@ -341,59 +168,27 @@
         }
       },
       "widgets_values": [
-        "Zelda Main Theme Song.mp3",
+        "",
         null
       ],
       "widgets_values_named": {
-        "audio": "Zelda Main Theme Song.mp3",
+        "audio": "",
         "upload": null
       }
-    },
-    {
-      "id": 46,
-      "type": "MarkdownNote",
-      "pos": [
-        220,
-        -260
-      ],
-      "size": [
-        550,
-        850
-      ],
-      "flags": {},
-      "order": 1,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [],
-      "properties": {
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "version": "8.0.1",
-          "input_ue_unconnectable": {}
-        }
-      },
-      "widgets_values": [
-        "# YuE2 Music Cover — Auto Vocal PRO V2\n\nPreserved: LoadAudio → SheetSage2 → YuE2GenerateMusic → KSampler → VAEDecodeAudio → SaveAudioAdvanced.\n\nAutomatic fix: converts the 1-bar \"Z4|\" placeholders of SheetSage2 into correctly timed Vocal notes, even if Instrumental has 4 bars.\n\n**section_policy = all_of_rest** by default: any vocal section including custom tags is converted, but instrumental-intent tags (intro, interlude, solo, outro) remain instrumental. `all_sections` truly includes those sections too. User overrides via vocal_tags / instrumental_tags.\n\nAdd any [section tag] to Lyrics; Lyrics passes unchanged into YuE2. ABC headings (% verse, % bridge, etc.) determine the score's musical structure; arbitrary lyrics tags are not guaranteed semantic controls for YuE2.\n\nInside the subgraph: `PreviewAny` before conversion (raw ABC), and after conversion (fixed ABC), plus a report with counts and warnings.\n\nSet strict=TRUE to stop empty-vocal outputs when there are no eligible groups or lyrics. FULL vs MELODY selects YuE2's interpretation of the supplied ABC; FULL does not automatically create complex accompaniment if the sheet lacks chords.\n\nInstall custom_nodes/yue2_auto_vocal_pro, restart ComfyUI, then import this workflow. Enter your own Lyrics; the field is empty in this Git-ready workflow. Compare vocal transfer before generating a long song.\n"
-      ],
-      "widgets_values_named": {
-        "text": "# YuE2 Music Cover — Auto Vocal PRO V2\n\nPreserved: LoadAudio → SheetSage2 → YuE2GenerateMusic → KSampler → VAEDecodeAudio → SaveAudioAdvanced.\n\nAutomatic fix: converts the 1-bar \"Z4|\" placeholders of SheetSage2 into correctly timed Vocal notes, even if Instrumental has 4 bars.\n\n**section_policy = all_of_rest** by default: any vocal section including custom tags is converted, but instrumental-intent tags (intro, interlude, solo, outro) remain instrumental. `all_sections` truly includes those sections too. User overrides via vocal_tags / instrumental_tags.\n\nAdd any [section tag] to Lyrics; Lyrics passes unchanged into YuE2. ABC headings (% verse, % bridge, etc.) determine the score's musical structure; arbitrary lyrics tags are not guaranteed semantic controls for YuE2.\n\nInside the subgraph: `PreviewAny` before conversion (raw ABC), and after conversion (fixed ABC), plus a report with counts and warnings.\n\nSet strict=TRUE to stop empty-vocal outputs when there are no eligible groups or lyrics. FULL vs MELODY selects YuE2's interpretation of the supplied ABC; FULL does not automatically create complex accompaniment if the sheet lacks chords.\n\nInstall custom_nodes/yue2_auto_vocal_pro, restart ComfyUI, then import this workflow. Enter your own Lyrics; the field is empty in this Git-ready workflow. Compare vocal transfer before generating a long song.\n"
-      },
-      "color": "#432",
-      "bgcolor": "#653"
     },
     {
       "id": 50,
       "type": "PrimitiveStringMultiline",
       "pos": [
-        800,
-        -65
+        60,
+        350
       ],
       "size": [
         590,
         305
       ],
       "flags": {},
-      "order": 2,
+      "order": 1,
       "mode": 0,
       "inputs": [
         {
@@ -412,11 +207,14 @@
           "name": "STRING",
           "type": "STRING",
           "links": [
-            118
+            123,
+            154,
+            163,
+            166
           ]
         }
       ],
-      "title": "Lyrics",
+      "title": "02 · Replacement Lyrics",
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.43.2",
@@ -438,15 +236,15 @@
       "id": 51,
       "type": "SeedNode",
       "pos": [
-        800,
-        300
+        420,
+        1080
       ],
       "size": [
         590,
         110
       ],
       "flags": {},
-      "order": 3,
+      "order": 2,
       "mode": 0,
       "inputs": [
         {
@@ -465,11 +263,12 @@
           "name": "seed",
           "type": "INT",
           "links": [
-            117
+            126,
+            147
           ]
         }
       ],
-      "title": "Seed — randomize / fixed",
+      "title": "05 · Seed (Random / Fixed)",
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.43.2",
@@ -481,1663 +280,2777 @@
         }
       },
       "widgets_values": [
-        561305085901585,
+        506695001838201,
         "randomize"
       ],
       "widgets_values_named": {
-        "seed": 561305085901585,
+        "seed": 506695001838201,
         "control_after_generate": "randomize"
       }
+    },
+    {
+      "id": 52,
+      "type": "LoadAudio",
+      "pos": [
+        60,
+        1360
+      ],
+      "size": [
+        590,
+        145
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "audio",
+          "name": "audio",
+          "type": "COMBO",
+          "widget": {
+            "name": "audio"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "audioUI",
+          "name": "audioUI",
+          "type": "AUDIO_UI",
+          "widget": {
+            "name": "audioUI"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "choose file to upload",
+          "name": "upload",
+          "type": "AUDIOUPLOAD",
+          "widget": {
+            "name": "upload"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "AUDIO",
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": [
+            127
+          ]
+        }
+      ],
+      "title": "06 · Reference Voice Audio",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.43.2",
+        "Node name for S&R": "LoadAudio",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "",
+        null
+      ],
+      "widgets_values_named": {
+        "audio": "",
+        "upload": null
+      }
+    },
+    {
+      "id": 53,
+      "type": "PrimitiveStringMultiline",
+      "pos": [
+        60,
+        735
+      ],
+      "size": [
+        590,
+        300
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "value",
+          "name": "value",
+          "type": "STRING",
+          "widget": {
+            "name": "value"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "STRING",
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            120,
+            159,
+            162
+          ]
+        }
+      ],
+      "title": "03 · Style / Arrangement",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.43.2",
+        "Node name for S&R": "PrimitiveStringMultiline",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        ""
+      ],
+      "widgets_values_named": {
+        "value": ""
+      }
+    },
+    {
+      "id": 54,
+      "type": "YuE2ReferenceVoiceCover",
+      "pos": [
+        940,
+        1810
+      ],
+      "size": [
+        690,
+        1070
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "source_audio",
+          "name": "source_audio",
+          "type": "AUDIO",
+          "link": 121
+        },
+        {
+          "localized_name": "reference_audio",
+          "name": "reference_audio",
+          "type": "AUDIO",
+          "link": 128
+        },
+        {
+          "localized_name": "style",
+          "name": "style",
+          "type": "STRING",
+          "link": 120
+        },
+        {
+          "localized_name": "lyrics",
+          "name": "lyrics",
+          "type": "STRING",
+          "link": 123
+        },
+        {
+          "localized_name": "reference_lyrics",
+          "name": "reference_lyrics",
+          "type": "STRING",
+          "widget": {
+            "name": "reference_lyrics"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "first_note_seconds",
+          "name": "first_note_seconds",
+          "type": "FLOAT",
+          "widget": {
+            "name": "first_note_seconds"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "ckpt_name",
+          "name": "ckpt_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "ckpt_name"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "audio_encoder_name",
+          "name": "audio_encoder_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "audio_encoder_name"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "seed",
+          "name": "seed",
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          },
+          "link": 126
+        },
+        {
+          "localized_name": "max_duration",
+          "name": "max_duration",
+          "type": "FLOAT",
+          "widget": {
+            "name": "max_duration"
+          },
+          "link": 129
+        },
+        {
+          "localized_name": "mert_model",
+          "name": "mert_model",
+          "type": "COMBO",
+          "widget": {
+            "name": "mert_model"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "tokenizer_name",
+          "name": "tokenizer_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "tokenizer_name"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "nar_lora_name",
+          "name": "nar_lora_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "nar_lora_name"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "whisper_model",
+          "name": "whisper_model",
+          "type": "COMBO",
+          "widget": {
+            "name": "whisper_model"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "whisper_mode",
+          "name": "whisper_mode",
+          "type": "COMBO",
+          "widget": {
+            "name": "whisper_mode"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "source_contamination_audit",
+          "name": "source_contamination_audit",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "source_contamination_audit"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "diagnostic_mode",
+          "name": "diagnostic_mode",
+          "type": "COMBO",
+          "widget": {
+            "name": "diagnostic_mode"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "diagnostics_include_text",
+          "name": "diagnostics_include_text",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "diagnostics_include_text"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "reference_clip_policy",
+          "name": "reference_clip_policy",
+          "type": "COMBO",
+          "widget": {
+            "name": "reference_clip_policy"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "reference_clip_seconds",
+          "name": "reference_clip_seconds",
+          "type": "FLOAT",
+          "widget": {
+            "name": "reference_clip_seconds"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "conditioning_mode",
+          "name": "conditioning_mode",
+          "type": "COMBO",
+          "widget": {
+            "name": "conditioning_mode"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "target_language",
+          "name": "target_language",
+          "type": "COMBO",
+          "widget": {
+            "name": "target_language"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "reference_quality_gate",
+          "name": "reference_quality_gate",
+          "type": "COMBO",
+          "widget": {
+            "name": "reference_quality_gate"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "legacy_prefix_behavior",
+          "name": "legacy_prefix_behavior",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "legacy_prefix_behavior"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "forensic_replay",
+          "name": "forensic_replay",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "forensic_replay"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "AUDIO",
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": [
+            124
+          ]
+        },
+        {
+          "localized_name": "report",
+          "name": "report",
+          "type": "STRING",
+          "links": [
+            133
+          ]
+        }
+      ],
+      "title": "YuE2 · Reference Voice",
+      "properties": {
+        "aux_id": "whitedragon0000/ComfyUI-YuE2-Auto-Vocal-PRO-v2",
+        "ver": "b3b7df818378d22dd83b922befa3afd532136d79",
+        "Node name for S&R": "YuE2ReferenceVoiceCover",
+        "ue_properties": {
+          "version": "7.8",
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "",
+        -1,
+        "yue2_3b_bf16.safetensors",
+        "sheetsage2_bf16.safetensors",
+        240,
+        "fixed",
+        360,
+        "MERT-v2-FullSong.safetensors",
+        "tokenizer_head_joint_v9.bf16.safetensors",
+        "nar_lora_joint_v9_comfyui.safetensors",
+        "whisper-large-v3-turbo.safetensors",
+        "auto",
+        false,
+        "segmented",
+        false,
+        "auto",
+        30,
+        "full",
+        "Italian",
+        "report_only",
+        false,
+        true
+      ],
+      "widgets_values_named": {
+        "reference_lyrics": "",
+        "first_note_seconds": -1,
+        "ckpt_name": "yue2_3b_bf16.safetensors",
+        "audio_encoder_name": "sheetsage2_bf16.safetensors",
+        "seed": 240,
+        "control_after_generate": "fixed",
+        "max_duration": 360,
+        "mert_model": "MERT-v2-FullSong.safetensors",
+        "tokenizer_name": "tokenizer_head_joint_v9.bf16.safetensors",
+        "nar_lora_name": "nar_lora_joint_v9_comfyui.safetensors",
+        "whisper_model": "whisper-large-v3-turbo.safetensors",
+        "whisper_mode": "auto",
+        "source_contamination_audit": false,
+        "diagnostic_mode": "segmented",
+        "diagnostics_include_text": false,
+        "reference_clip_policy": "auto",
+        "reference_clip_seconds": 30,
+        "conditioning_mode": "full",
+        "target_language": "Italian",
+        "reference_quality_gate": "report_only",
+        "legacy_prefix_behavior": false,
+        "forensic_replay": true
+      }
+    },
+    {
+      "id": 55,
+      "type": "YuE2CoverModeSelector",
+      "pos": [
+        4580,
+        80
+      ],
+      "size": [
+        460,
+        260
+      ],
+      "flags": {},
+      "order": 27,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "standard_audio",
+          "name": "standard_audio",
+          "type": "AUDIO",
+          "link": 63
+        },
+        {
+          "localized_name": "reference_audio",
+          "name": "reference_audio",
+          "type": "AUDIO",
+          "link": 124
+        },
+        {
+          "localized_name": "mode",
+          "name": "mode",
+          "type": "COMBO",
+          "widget": {
+            "name": "mode"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "reference_report",
+          "name": "reference_report",
+          "shape": 7,
+          "type": "STRING",
+          "widget": {
+            "name": "reference_report"
+          },
+          "link": 133
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "AUDIO",
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": [
+            165
+          ]
+        },
+        {
+          "localized_name": "selected_mode_report",
+          "name": "selected_mode_report",
+          "type": "STRING",
+          "links": [
+            134,
+            244
+          ]
+        }
+      ],
+      "title": "Select Standard / Reference Voice",
+      "properties": {
+        "aux_id": "whitedragon0000/ComfyUI-YuE2-Auto-Vocal-PRO-v2",
+        "ver": "b3b7df818378d22dd83b922befa3afd532136d79",
+        "Node name for S&R": "YuE2CoverModeSelector",
+        "ue_properties": {
+          "version": "7.8",
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "reference_voice",
+        ""
+      ],
+      "widgets_values_named": {
+        "mode": "reference_voice",
+        "reference_report": ""
+      }
+    },
+    {
+      "id": 56,
+      "type": "YuE2ReferenceVoiceModels",
+      "pos": [
+        1680,
+        1770
+      ],
+      "size": [
+        500,
+        110
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "action",
+          "name": "action",
+          "type": "COMBO",
+          "widget": {
+            "name": "action"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "report",
+          "name": "report",
+          "type": "STRING",
+          "links": [
+            131
+          ]
+        }
+      ],
+      "title": "Reference · Check Models",
+      "properties": {
+        "aux_id": "whitedragon0000/ComfyUI-YuE2-Auto-Vocal-PRO-v2",
+        "ver": "b3b7df818378d22dd83b922befa3afd532136d79",
+        "Node name for S&R": "YuE2ReferenceVoiceModels",
+        "ue_properties": {
+          "version": "7.8",
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "check"
+      ],
+      "widgets_values_named": {
+        "action": "check"
+      }
+    },
+    {
+      "id": 57,
+      "type": "TrimAudioDuration",
+      "pos": [
+        60,
+        1550
+      ],
+      "size": [
+        276.1166595458984,
+        82
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "audio",
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 127
+        },
+        {
+          "localized_name": "start_index",
+          "name": "start_index",
+          "type": "FLOAT",
+          "widget": {
+            "name": "start_index"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "duration",
+          "name": "duration",
+          "type": "FLOAT",
+          "widget": {
+            "name": "duration"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "AUDIO",
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": [
+            128
+          ]
+        }
+      ],
+      "title": "Reference · Prepare Audio Clip",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.43.2",
+        "Node name for S&R": "TrimAudioDuration",
+        "ue_properties": {
+          "version": "8.0.1",
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "title_regex": null,
+          "input_regex": null,
+          "group_regex": null,
+          "title_regex_invert": false,
+          "input_regex_invert": false,
+          "group_regex_invert": false,
+          "apply_to_unrepeated": 0,
+          "send_to_any": 0,
+          "string_to_combo": 0,
+          "repeated_type_rule": 0,
+          "group_restricted": 0,
+          "color_restricted": 0
+        }
+      },
+      "widgets_values": [
+        0,
+        40
+      ],
+      "widgets_values_named": {
+        "start_index": 0,
+        "duration": 40
+      }
+    },
+    {
+      "id": 59,
+      "type": "PrimitiveFloat",
+      "pos": [
+        60,
+        1080
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "value",
+          "name": "value",
+          "type": "FLOAT",
+          "widget": {
+            "name": "value"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "FLOAT",
+          "name": "FLOAT",
+          "type": "FLOAT",
+          "links": [
+            129,
+            161,
+            167,
+            241
+          ]
+        }
+      ],
+      "title": "04 · Maximum Duration (seconds)",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.43.2",
+        "Node name for S&R": "PrimitiveFloat",
+        "ue_properties": {
+          "version": "8.0.1",
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "title_regex": null,
+          "input_regex": null,
+          "group_regex": null,
+          "title_regex_invert": false,
+          "input_regex_invert": false,
+          "group_regex_invert": false,
+          "apply_to_unrepeated": 0,
+          "send_to_any": 0,
+          "string_to_combo": 0,
+          "repeated_type_rule": 0,
+          "group_restricted": 0,
+          "color_restricted": 0
+        }
+      },
+      "widgets_values": [
+        360
+      ],
+      "widgets_values_named": {
+        "value": 360
+      }
+    },
+    {
+      "id": 60,
+      "type": "PreviewAny",
+      "pos": [
+        1680,
+        2020
+      ],
+      "size": [
+        491.8821917773648,
+        215.6020874070142
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "source",
+          "name": "source",
+          "type": "*",
+          "link": 131
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "STRING",
+          "name": "STRING",
+          "type": "STRING",
+          "links": []
+        }
+      ],
+      "title": "Reference · Model Status",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.43.2",
+        "Node name for S&R": "PreviewAny",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [],
+      "widgets_values_named": {}
+    },
+    {
+      "id": 61,
+      "type": "PreviewAny",
+      "pos": [
+        4590,
+        560
+      ],
+      "size": [
+        590,
+        265
+      ],
+      "flags": {},
+      "order": 28,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "source",
+          "name": "source",
+          "type": "*",
+          "link": 134
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "STRING",
+          "name": "STRING",
+          "type": "STRING",
+          "links": []
+        }
+      ],
+      "title": "Reference Voice · Execution Report",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.43.2",
+        "Node name for S&R": "PreviewAny",
+        "ue_properties": {
+          "version": "7.8",
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [],
+      "widgets_values_named": {}
+    },
+    {
+      "id": 176,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        850,
+        40
+      ],
+      "size": [
+        420,
+        110
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "ckpt_name",
+          "name": "ckpt_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "ckpt_name"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "MODEL",
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            138
+          ]
+        },
+        {
+          "localized_name": "CLIP",
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            135,
+            158
+          ]
+        },
+        {
+          "localized_name": "VAE",
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            144
+          ]
+        }
+      ],
+      "title": "YuE2 · Checkpoint",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.43.2",
+        "Node name for S&R": "CheckpointLoaderSimple",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "yue2_3b_bf16.safetensors"
+      ],
+      "widgets_values_named": {
+        "ckpt_name": "yue2_3b_bf16.safetensors"
+      }
+    },
+    {
+      "id": 186,
+      "type": "YuE2GenerateMusic",
+      "pos": [
+        2730,
+        90
+      ],
+      "size": [
+        400,
+        450
+      ],
+      "flags": {},
+      "order": 20,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "clip",
+          "name": "clip",
+          "type": "CLIP",
+          "link": 135
+        },
+        {
+          "localized_name": "style",
+          "name": "style",
+          "type": "STRING",
+          "widget": {
+            "name": "style"
+          },
+          "link": 164
+        },
+        {
+          "localized_name": "lyrics",
+          "name": "lyrics",
+          "type": "STRING",
+          "widget": {
+            "name": "lyrics"
+          },
+          "link": 156
+        },
+        {
+          "localized_name": "abc",
+          "name": "abc",
+          "type": "STRING",
+          "widget": {
+            "name": "abc"
+          },
+          "link": 152
+        },
+        {
+          "localized_name": "seed",
+          "name": "seed",
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          },
+          "link": 145
+        },
+        {
+          "localized_name": "mode",
+          "name": "mode",
+          "type": "COMBO",
+          "widget": {
+            "name": "mode"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "max_duration",
+          "name": "max_duration",
+          "type": "FLOAT",
+          "widget": {
+            "name": "max_duration"
+          },
+          "link": 242
+        },
+        {
+          "localized_name": "temperature",
+          "name": "temperature",
+          "type": "FLOAT",
+          "widget": {
+            "name": "temperature"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "top_p",
+          "name": "top_p",
+          "type": "FLOAT",
+          "widget": {
+            "name": "top_p"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "top_k",
+          "name": "top_k",
+          "type": "INT",
+          "widget": {
+            "name": "top_k"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "repetition_penalty",
+          "name": "repetition_penalty",
+          "type": "FLOAT",
+          "widget": {
+            "name": "repetition_penalty"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "cfg_scale",
+          "name": "cfg_scale",
+          "shape": 7,
+          "type": "FLOAT",
+          "widget": {
+            "name": "cfg_scale"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "CONDITIONING",
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            136,
+            139
+          ]
+        },
+        {
+          "localized_name": "seconds",
+          "name": "seconds",
+          "type": "FLOAT",
+          "links": [
+            137,
+            142
+          ]
+        }
+      ],
+      "title": "YuE2 · Music + Lyrics Generation",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.43.2",
+        "Node name for S&R": "YuE2GenerateMusic",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "",
+        "",
+        "",
+        530976807293994,
+        "fixed",
+        "melody",
+        360,
+        1,
+        0.95,
+        100,
+        1.2,
+        1
+      ],
+      "widgets_values_named": {
+        "style": "",
+        "lyrics": "",
+        "abc": "",
+        "seed": 530976807293994,
+        "control_after_generate": "fixed",
+        "mode": "melody",
+        "max_duration": 360,
+        "temperature": 1,
+        "top_p": 0.95,
+        "top_k": 100,
+        "repetition_penalty": 1.2,
+        "cfg_scale": 1
+      }
+    },
+    {
+      "id": 179,
+      "type": "ConditioningZeroOut",
+      "pos": [
+        3190,
+        580
+      ],
+      "size": [
+        230,
+        40
+      ],
+      "flags": {},
+      "order": 22,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "conditioning",
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 136
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "CONDITIONING",
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            140
+          ]
+        }
+      ],
+      "title": "Negative Conditioning",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.43.2",
+        "Node name for S&R": "ConditioningZeroOut",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      }
+    },
+    {
+      "id": 184,
+      "type": "PreviewAny",
+      "pos": [
+        3170,
+        390
+      ],
+      "size": [
+        270,
+        140
+      ],
+      "flags": {},
+      "order": 23,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "source",
+          "name": "source",
+          "type": "*",
+          "link": 137
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "STRING",
+          "name": "STRING",
+          "type": "STRING",
+          "links": []
+        }
+      ],
+      "title": "Generated Duration",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.43.2",
+        "Node name for S&R": "PreviewAny",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [],
+      "widgets_values_named": {}
+    },
+    {
+      "id": 169,
+      "type": "KSampler",
+      "pos": [
+        3590,
+        90
+      ],
+      "size": [
+        330,
+        270
+      ],
+      "flags": {},
+      "order": 25,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "model",
+          "name": "model",
+          "type": "MODEL",
+          "link": 138
+        },
+        {
+          "localized_name": "positive",
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 139
+        },
+        {
+          "localized_name": "negative",
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 140
+        },
+        {
+          "localized_name": "latent_image",
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 141
+        },
+        {
+          "localized_name": "seed",
+          "name": "seed",
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          },
+          "link": 146
+        },
+        {
+          "localized_name": "steps",
+          "name": "steps",
+          "type": "INT",
+          "widget": {
+            "name": "steps"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "cfg",
+          "name": "cfg",
+          "type": "FLOAT",
+          "widget": {
+            "name": "cfg"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "sampler_name",
+          "name": "sampler_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "sampler_name"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "scheduler",
+          "name": "scheduler",
+          "type": "COMBO",
+          "widget": {
+            "name": "scheduler"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "denoise",
+          "name": "denoise",
+          "type": "FLOAT",
+          "widget": {
+            "name": "denoise"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "LATENT",
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            143
+          ]
+        }
+      ],
+      "title": "NAR · Sampling",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.43.2",
+        "Node name for S&R": "KSampler",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        42,
+        "fixed",
+        64,
+        1,
+        "dpm_2",
+        "sgm_uniform",
+        1
+      ],
+      "widgets_values_named": {
+        "seed": 42,
+        "control_after_generate": "fixed",
+        "steps": 64,
+        "cfg": 1,
+        "sampler_name": "dpm_2",
+        "scheduler": "sgm_uniform",
+        "denoise": 1
+      }
+    },
+    {
+      "id": 166,
+      "type": "EmptyYuE2LatentAudio",
+      "pos": [
+        3200,
+        840
+      ],
+      "size": [
+        230,
+        90
+      ],
+      "flags": {},
+      "order": 24,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "seconds",
+          "name": "seconds",
+          "type": "FLOAT",
+          "widget": {
+            "name": "seconds"
+          },
+          "link": 142
+        },
+        {
+          "localized_name": "batch_size",
+          "name": "batch_size",
+          "type": "INT",
+          "widget": {
+            "name": "batch_size"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "LATENT",
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            141
+          ]
+        }
+      ],
+      "title": "Audio Latent",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.43.2",
+        "Node name for S&R": "EmptyYuE2LatentAudio",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        120,
+        1
+      ],
+      "widgets_values_named": {
+        "seconds": 120,
+        "batch_size": 1
+      }
+    },
+    {
+      "id": 170,
+      "type": "VAEDecodeAudio",
+      "pos": [
+        4070,
+        90
+      ],
+      "size": [
+        230,
+        60
+      ],
+      "flags": {},
+      "order": 26,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "samples",
+          "name": "samples",
+          "type": "LATENT",
+          "link": 143
+        },
+        {
+          "localized_name": "vae",
+          "name": "vae",
+          "type": "VAE",
+          "link": 144
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "AUDIO",
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": [
+            63
+          ]
+        }
+      ],
+      "title": "Decode Audio",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.43.2",
+        "Node name for S&R": "VAEDecodeAudio",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      }
+    },
+    {
+      "id": 195,
+      "type": "SeedNode",
+      "pos": [
+        1550,
+        1080
+      ],
+      "size": [
+        270,
+        90
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "seed",
+          "name": "seed",
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          },
+          "link": 147
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "seed",
+          "name": "seed",
+          "type": "INT",
+          "links": [
+            145,
+            146,
+            160
+          ]
+        }
+      ],
+      "title": "Generator Seed",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.43.2",
+        "Node name for S&R": "SeedNode",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        0,
+        "fixed"
+      ],
+      "widgets_values_named": {
+        "seed": 0,
+        "control_after_generate": "fixed"
+      }
+    },
+    {
+      "id": 202,
+      "type": "SheetSage2AudioToABC",
+      "pos": [
+        1300,
+        400
+      ],
+      "size": [
+        281.6666625976562,
+        90
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "audio_encoder",
+          "name": "audio_encoder",
+          "type": "AUDIO_ENCODER",
+          "link": 148
+        },
+        {
+          "localized_name": "audio",
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 149
+        },
+        {
+          "localized_name": "mode",
+          "name": "mode",
+          "type": "COMBO",
+          "widget": {
+            "name": "mode"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "abc",
+          "name": "abc",
+          "shape": 6,
+          "type": "STRING",
+          "links": [
+            150
+          ]
+        }
+      ],
+      "title": "SheetSage2 · Source Score",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.43.2",
+        "Node name for S&R": "SheetSage2AudioToABC",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "melody"
+      ],
+      "widgets_values_named": {
+        "mode": "melody"
+      }
+    },
+    {
+      "id": 204,
+      "type": "AudioEncoderLoader",
+      "pos": [
+        850,
+        410
+      ],
+      "size": [
+        420,
+        80
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "audio_encoder_name",
+          "name": "audio_encoder_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "audio_encoder_name"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "AUDIO_ENCODER",
+          "name": "AUDIO_ENCODER",
+          "type": "AUDIO_ENCODER",
+          "links": [
+            148
+          ]
+        }
+      ],
+      "title": "SheetSage2 · Encoder",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.43.2",
+        "Node name for S&R": "AudioEncoderLoader",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "sheetsage2_bf16.safetensors"
+      ],
+      "widgets_values_named": {
+        "audio_encoder_name": "sheetsage2_bf16.safetensors"
+      }
+    },
+    {
+      "id": 205,
+      "type": "PreviewAny",
+      "pos": [
+        980,
+        710
+      ],
+      "size": [
+        470,
+        300
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "source",
+          "name": "source",
+          "type": "*",
+          "link": 150
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "STRING",
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            151
+          ]
+        }
+      ],
+      "title": "Source ABC Preview",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.43.2",
+        "Node name for S&R": "PreviewAny",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [],
+      "widgets_values_named": {}
+    },
+    {
+      "id": 208,
+      "type": "YuE2AutoVocalPRO",
+      "pos": [
+        1588.1726495758267,
+        83.37924297833524
+      ],
+      "size": [
+        520,
+        560
+      ],
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "abc",
+          "name": "abc",
+          "type": "STRING",
+          "link": 151
+        },
+        {
+          "localized_name": "lyrics",
+          "name": "lyrics",
+          "type": "STRING",
+          "link": 154
+        },
+        {
+          "localized_name": "clip",
+          "name": "clip",
+          "shape": 7,
+          "type": "CLIP",
+          "link": 158
+        },
+        {
+          "localized_name": "style",
+          "name": "style",
+          "shape": 7,
+          "type": "STRING",
+          "link": 159
+        },
+        {
+          "localized_name": "progress_node_id",
+          "name": "progress_node_id",
+          "shape": 7,
+          "type": "STRING",
+          "link": null
+        },
+        {
+          "localized_name": "reference_composite",
+          "name": "reference_composite",
+          "shape": 7,
+          "type": "BOOLEAN",
+          "link": null
+        },
+        {
+          "localized_name": "source_audio",
+          "name": "source_audio",
+          "shape": 7,
+          "type": "AUDIO",
+          "link": null
+        },
+        {
+          "localized_name": "section_policy",
+          "name": "section_policy",
+          "type": "COMBO",
+          "widget": {
+            "name": "section_policy"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "instrumental_handling",
+          "name": "instrumental_handling",
+          "type": "COMBO",
+          "widget": {
+            "name": "instrumental_handling"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "existing_vocal",
+          "name": "existing_vocal",
+          "type": "COMBO",
+          "widget": {
+            "name": "existing_vocal"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "instrumental_tags",
+          "name": "instrumental_tags",
+          "type": "STRING",
+          "widget": {
+            "name": "instrumental_tags"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "vocal_tags",
+          "name": "vocal_tags",
+          "type": "STRING",
+          "widget": {
+            "name": "vocal_tags"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "strict",
+          "name": "strict",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "strict"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "vocal_melody_mode",
+          "name": "vocal_melody_mode",
+          "type": "COMBO",
+          "widget": {
+            "name": "vocal_melody_mode"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "seed",
+          "name": "seed",
+          "shape": 7,
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          },
+          "link": 160
+        },
+        {
+          "localized_name": "max_duration",
+          "name": "max_duration",
+          "shape": 7,
+          "type": "FLOAT",
+          "widget": {
+            "name": "max_duration"
+          },
+          "link": 161
+        },
+        {
+          "localized_name": "reference_sample_only",
+          "name": "reference_sample_only",
+          "shape": 7,
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "reference_sample_only"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "forensic_replay",
+          "name": "forensic_replay",
+          "shape": 7,
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "forensic_replay"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "abc",
+          "name": "abc",
+          "type": "STRING",
+          "links": [
+            152,
+            157,
+            240
+          ]
+        },
+        {
+          "localized_name": "lyrics",
+          "name": "lyrics",
+          "type": "STRING",
+          "links": [
+            156
+          ]
+        },
+        {
+          "localized_name": "report",
+          "name": "report",
+          "type": "STRING",
+          "links": [
+            153
+          ]
+        }
+      ],
+      "title": "ABC + Lyrics · Alignment",
+      "properties": {
+        "aux_id": "whitedragon0000/ComfyUI-YuE2-Auto-Vocal-PRO-v2",
+        "ver": "b3b7df818378d22dd83b922befa3afd532136d79",
+        "Node name for S&R": "YuE2AutoVocalPRO",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "all_of_rest",
+        "replace_with_rests",
+        "preserve",
+        "",
+        "",
+        true,
+        "Adaptive",
+        "",
+        true,
+        0.0,
+        false,
+        true
+      ],
+      "widgets_values_named": {
+        "section_policy": "all_of_rest",
+        "instrumental_handling": "replace_with_rests",
+        "existing_vocal": "preserve",
+        "instrumental_tags": "",
+        "vocal_tags": "",
+        "strict": true,
+        "vocal_melody_mode": "Adaptive",
+        "progress_node_id": "",
+        "reference_composite": false,
+        "max_duration": 360.0,
+        "reference_sample_only": false,
+        "forensic_replay": true
+      }
+    },
+    {
+      "id": 209,
+      "type": "PreviewAny",
+      "pos": [
+        2140,
+        90
+      ],
+      "size": [
+        465,
+        190
+      ],
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "source",
+          "name": "source",
+          "type": "*",
+          "link": 153
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "STRING",
+          "name": "STRING",
+          "type": "STRING",
+          "links": []
+        }
+      ],
+      "title": "Symbolic Alignment Report",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.43.2",
+        "Node name for S&R": "PreviewAny",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [],
+      "widgets_values_named": {}
+    },
+    {
+      "id": 210,
+      "type": "PreviewAny",
+      "pos": [
+        2140,
+        430
+      ],
+      "size": [
+        465,
+        190
+      ],
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "source",
+          "name": "source",
+          "type": "*",
+          "link": 157
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "STRING",
+          "name": "STRING",
+          "type": "STRING",
+          "links": []
+        }
+      ],
+      "title": "Final ABC Preview",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.43.2",
+        "Node name for S&R": "PreviewAny",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [],
+      "widgets_values_named": {}
+    },
+    {
+      "id": 223,
+      "type": "YuE2InstrumentalAwareStyle",
+      "pos": [
+        1510,
+        765
+      ],
+      "size": [
+        340,
+        125
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "style",
+          "name": "style",
+          "type": "STRING",
+          "link": 162
+        },
+        {
+          "localized_name": "lyrics",
+          "name": "lyrics",
+          "type": "STRING",
+          "link": 163
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "effective_style",
+          "name": "effective_style",
+          "type": "STRING",
+          "links": [
+            164
+          ]
+        }
+      ],
+      "title": "Style · Instrumental Mode",
+      "properties": {
+        "aux_id": "whitedragon0000/ComfyUI-YuE2-Auto-Vocal-PRO-v2",
+        "ver": "b3b7df818378d22dd83b922befa3afd532136d79",
+        "Node name for S&R": "YuE2InstrumentalAwareStyle",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      }
+    },
+    {
+      "id": 224,
+      "type": "YuE2VocalFidelityAudit",
+      "pos": [
+        5100,
+        80
+      ],
+      "size": [
+        460,
+        480
+      ],
+      "flags": {},
+      "order": 29,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "audio",
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 165
+        },
+        {
+          "localized_name": "lyrics",
+          "name": "lyrics",
+          "type": "STRING",
+          "link": 166
+        },
+        {
+          "localized_name": "source_audio",
+          "name": "source_audio",
+          "shape": 7,
+          "type": "AUDIO",
+          "link": 168
+        },
+        {
+          "localized_name": "selected_mode_report",
+          "name": "selected_mode_report",
+          "shape": 7,
+          "type": "STRING",
+          "link": 244
+        },
+        {
+          "localized_name": "max_duration",
+          "name": "max_duration",
+          "type": "FLOAT",
+          "widget": {
+            "name": "max_duration"
+          },
+          "link": 167
+        },
+        {
+          "localized_name": "whisper_mode",
+          "name": "whisper_mode",
+          "type": "COMBO",
+          "widget": {
+            "name": "whisper_mode"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "whisper_model",
+          "name": "whisper_model",
+          "type": "COMBO",
+          "widget": {
+            "name": "whisper_model"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "quality_gate",
+          "name": "quality_gate",
+          "type": "COMBO",
+          "widget": {
+            "name": "quality_gate"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "source_contamination_audit",
+          "name": "source_contamination_audit",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "source_contamination_audit"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "reference_text",
+          "name": "reference_text",
+          "shape": 7,
+          "type": "STRING",
+          "widget": {
+            "name": "reference_text"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "AUDIO",
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": [
+            125
+          ]
+        },
+        {
+          "localized_name": "quality_report",
+          "name": "quality_report",
+          "type": "STRING",
+          "links": [
+            169
+          ]
+        }
+      ],
+      "title": "Final Audio · Vocal Fidelity Audit",
+      "properties": {
+        "aux_id": "whitedragon0000/ComfyUI-YuE2-Auto-Vocal-PRO-v2",
+        "ver": "b3b7df818378d22dd83b922befa3afd532136d79",
+        "Node name for S&R": "YuE2VocalFidelityAudit",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "auto",
+        "whisper-large-v3-turbo.safetensors",
+        "report_only",
+        false,
+        ""
+      ],
+      "widgets_values_named": {
+        "whisper_mode": "auto",
+        "whisper_model": "whisper-large-v3-turbo.safetensors",
+        "quality_gate": "report_only",
+        "source_contamination_audit": false,
+        "reference_text": ""
+      }
+    },
+    {
+      "id": 225,
+      "type": "PreviewAny",
+      "pos": [
+        5610,
+        650
+      ],
+      "size": [
+        490,
+        205
+      ],
+      "flags": {},
+      "order": 31,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "source",
+          "name": "source",
+          "type": "*",
+          "link": 169
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "STRING",
+          "name": "STRING",
+          "type": "STRING",
+          "links": []
+        }
+      ],
+      "title": "Lyrics Fidelity · Selected Output",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.43.2",
+        "Node name for S&R": "PreviewAny",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [],
+      "widgets_values_named": {}
+    },
+    {
+      "id": 226,
+      "type": "YuE2AdaptiveDurationBudget",
+      "pos": [
+        2120,
+        780
+      ],
+      "size": [
+        350,
+        100
+      ],
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "abc",
+          "name": "abc",
+          "type": "STRING",
+          "link": 240
+        },
+        {
+          "localized_name": "max_duration",
+          "name": "max_duration",
+          "type": "FLOAT",
+          "link": 241
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "semantic_max_duration",
+          "name": "semantic_max_duration",
+          "type": "FLOAT",
+          "links": [
+            242
+          ]
+        },
+        {
+          "localized_name": "duration_report",
+          "name": "duration_report",
+          "type": "STRING",
+          "links": [
+            243
+          ]
+        }
+      ],
+      "title": "Semantic Duration Budget",
+      "properties": {
+        "aux_id": "whitedragon0000/ComfyUI-YuE2-Auto-Vocal-PRO-v2",
+        "ver": "b3b7df818378d22dd83b922befa3afd532136d79",
+        "Node name for S&R": "YuE2AdaptiveDurationBudget",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "8.0.1",
+          "input_ue_unconnectable": {}
+        }
+      }
+    },
+    {
+      "id": 227,
+      "type": "PreviewAny",
+      "pos": [
+        2520,
+        790
+      ],
+      "size": [
+        490,
+        205
+      ],
+      "flags": {},
+      "order": 21,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "source",
+          "name": "source",
+          "type": "*",
+          "link": 243
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "STRING",
+          "name": "STRING",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "Semantic Budget Report",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.43.2",
+        "Node name for S&R": "PreviewAny",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [],
+      "widgets_values_named": {}
     }
   ],
   "links": [
     [
-      97,
-      45,
+      63,
+      170,
       0,
-      33,
-      5,
+      55,
+      0,
       "AUDIO"
     ],
     [
-      117,
+      120,
+      53,
+      0,
+      54,
+      2,
+      "STRING"
+    ],
+    [
+      121,
+      45,
+      0,
+      54,
+      0,
+      "AUDIO"
+    ],
+    [
+      123,
+      50,
+      0,
+      54,
+      3,
+      "STRING"
+    ],
+    [
+      124,
+      54,
+      0,
+      55,
+      1,
+      "AUDIO"
+    ],
+    [
+      126,
       51,
       0,
-      33,
-      3,
+      54,
+      8,
       "INT"
     ],
     [
-      63,
-      33,
+      127,
+      52,
+      0,
+      57,
+      0,
+      "AUDIO"
+    ],
+    [
+      128,
+      57,
+      0,
+      54,
+      1,
+      "AUDIO"
+    ],
+    [
+      129,
+      59,
+      0,
+      54,
+      9,
+      "FLOAT"
+    ],
+    [
+      131,
+      56,
+      0,
+      60,
+      0,
+      "STRING"
+    ],
+    [
+      133,
+      54,
+      1,
+      55,
+      3,
+      "STRING"
+    ],
+    [
+      134,
+      55,
+      1,
+      61,
+      0,
+      "STRING"
+    ],
+    [
+      135,
+      176,
+      1,
+      186,
+      0,
+      "CLIP"
+    ],
+    [
+      136,
+      186,
+      0,
+      179,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      137,
+      186,
+      1,
+      184,
+      0,
+      "FLOAT"
+    ],
+    [
+      138,
+      176,
+      0,
+      169,
+      0,
+      "MODEL"
+    ],
+    [
+      139,
+      186,
+      0,
+      169,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      140,
+      179,
+      0,
+      169,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      141,
+      166,
+      0,
+      169,
+      3,
+      "LATENT"
+    ],
+    [
+      142,
+      186,
+      1,
+      166,
+      0,
+      "FLOAT"
+    ],
+    [
+      143,
+      169,
+      0,
+      170,
+      0,
+      "LATENT"
+    ],
+    [
+      144,
+      176,
+      2,
+      170,
+      1,
+      "VAE"
+    ],
+    [
+      145,
+      195,
+      0,
+      186,
+      4,
+      "INT"
+    ],
+    [
+      146,
+      195,
+      0,
+      169,
+      4,
+      "INT"
+    ],
+    [
+      147,
+      51,
+      0,
+      195,
+      0,
+      "INT"
+    ],
+    [
+      148,
+      204,
+      0,
+      202,
+      0,
+      "AUDIO_ENCODER"
+    ],
+    [
+      149,
+      45,
+      0,
+      202,
+      1,
+      "AUDIO"
+    ],
+    [
+      150,
+      202,
+      0,
+      205,
+      0,
+      "STRING"
+    ],
+    [
+      151,
+      205,
+      0,
+      208,
+      0,
+      "STRING"
+    ],
+    [
+      152,
+      208,
+      0,
+      186,
+      3,
+      "STRING"
+    ],
+    [
+      153,
+      208,
+      2,
+      209,
+      0,
+      "STRING"
+    ],
+    [
+      154,
+      50,
+      0,
+      208,
+      1,
+      "STRING"
+    ],
+    [
+      156,
+      208,
+      1,
+      186,
+      2,
+      "STRING"
+    ],
+    [
+      157,
+      208,
+      0,
+      210,
+      0,
+      "STRING"
+    ],
+    [
+      162,
+      53,
+      0,
+      223,
+      0,
+      "STRING"
+    ],
+    [
+      163,
+      50,
+      0,
+      223,
+      1,
+      "STRING"
+    ],
+    [
+      164,
+      223,
+      0,
+      186,
+      1,
+      "STRING"
+    ],
+    [
+      165,
+      55,
+      0,
+      224,
+      0,
+      "AUDIO"
+    ],
+    [
+      166,
+      50,
+      0,
+      224,
+      1,
+      "STRING"
+    ],
+    [
+      169,
+      224,
+      1,
+      225,
+      0,
+      "STRING"
+    ],
+    [
+      240,
+      208,
+      0,
+      226,
+      0,
+      "STRING"
+    ],
+    [
+      241,
+      59,
+      0,
+      226,
+      1,
+      "FLOAT"
+    ],
+    [
+      242,
+      226,
+      0,
+      186,
+      6,
+      "FLOAT"
+    ],
+    [
+      243,
+      226,
+      1,
+      227,
+      0,
+      "STRING"
+    ],
+    [
+      125,
+      224,
       0,
       10,
       0,
       "AUDIO"
     ],
     [
-      118,
-      50,
-      0,
-      33,
+      158,
+      176,
       1,
+      208,
+      2,
+      "CLIP"
+    ],
+    [
+      159,
+      53,
+      0,
+      208,
+      3,
+      "STRING"
+    ],
+    [
+      160,
+      195,
+      0,
+      208,
+      14,
+      "INT"
+    ],
+    [
+      161,
+      59,
+      0,
+      208,
+      15,
+      "FLOAT"
+    ],
+    [
+      167,
+      59,
+      0,
+      224,
+      4,
+      "FLOAT"
+    ],
+    [
+      168,
+      45,
+      0,
+      224,
+      2,
+      "AUDIO"
+    ],
+    [
+      244,
+      55,
+      1,
+      224,
+      3,
       "STRING"
     ]
   ],
-  "groups": [],
-  "definitions": {
-    "subgraphs": [
-      {
-        "id": "59dddde1-2d83-4b6e-9c71-1e5cb2d823d6",
-        "version": 1,
-        "state": {
-          "lastGroupId": 7,
-          "lastNodeId": 52,
-          "lastLinkId": 118,
-          "lastRerouteId": 0
-        },
-        "revision": 0,
-        "config": {},
-        "name": "Music Cover (YuE2) — Auto Vocal PRO v2",
-        "inputNode": {
-          "id": -10,
-          "bounding": [
-            -840,
-            -550,
-            207.14999389648438,
-            328
-          ]
-        },
-        "outputNode": {
-          "id": -20,
-          "bounding": [
-            2930,
-            -690,
-            128,
-            68
-          ]
-        },
-        "inputs": [
-          {
-            "id": "yue2_in_0",
-            "name": "style",
-            "type": "STRING",
-            "linkIds": [
-              95
-            ],
-            "label": "Style",
-            "pos": [
-              -656.8500061035156,
-              -526
-            ]
-          },
-          {
-            "id": "yue2_in_1",
-            "name": "lyrics",
-            "type": "STRING",
-            "linkIds": [
-              96
-            ],
-            "label": "Lyrics",
-            "pos": [
-              -656.8500061035156,
-              -506
-            ]
-          },
-          {
-            "id": "yue2_in_2",
-            "name": "max_duration",
-            "type": "FLOAT",
-            "linkIds": [
-              79
-            ],
-            "pos": [
-              -656.8500061035156,
-              -486
-            ]
-          },
-          {
-            "id": "yue2_in_3",
-            "name": "seed",
-            "type": "INT",
-            "linkIds": [
-              80
-            ],
-            "pos": [
-              -656.8500061035156,
-              -466
-            ]
-          },
-          {
-            "id": "yue2_in_4",
-            "name": "ckpt_name",
-            "type": "COMBO",
-            "linkIds": [
-              81
-            ],
-            "pos": [
-              -656.8500061035156,
-              -446
-            ]
-          },
-          {
-            "id": "yue2_in_5",
-            "name": "audio",
-            "type": "AUDIO",
-            "linkIds": [
-              90
-            ],
-            "pos": [
-              -656.8500061035156,
-              -426
-            ]
-          },
-          {
-            "id": "yue2_in_6",
-            "name": "audio_encoder_name",
-            "type": "COMBO",
-            "linkIds": [
-              91
-            ],
-            "pos": [
-              -656.8500061035156,
-              -406
-            ]
-          },
-          {
-            "id": "yue2_in_7",
-            "name": "planning_mode",
-            "type": "COMBO",
-            "linkIds": [
-              105
-            ],
-            "label": "Planning mode (melody/full)",
-            "pos": [
-              -656.8500061035156,
-              -386
-            ]
-          },
-          {
-            "id": "yue2_pro_v2_section_policy",
-            "name": "section_policy",
-            "type": "COMBO",
-            "linkIds": [
-              108
-            ],
-            "label": "Vocal sections / all_of_rest",
-            "pos": [
-              -656.8500061035156,
-              -366
-            ]
-          },
-          {
-            "id": "yue2_pro_v2_instrumental_handling",
-            "name": "instrumental_handling",
-            "type": "COMBO",
-            "linkIds": [
-              109
-            ],
-            "label": "Instrumental lead",
-            "pos": [
-              -656.8500061035156,
-              -346
-            ]
-          },
-          {
-            "id": "yue2_pro_v2_existing_vocal",
-            "name": "existing_vocal",
-            "type": "COMBO",
-            "linkIds": [
-              110
-            ],
-            "label": "Existing voice",
-            "pos": [
-              -656.8500061035156,
-              -326
-            ]
-          },
-          {
-            "id": "yue2_pro_v2_instrumental_tags",
-            "name": "instrumental_tags",
-            "type": "STRING",
-            "linkIds": [
-              111
-            ],
-            "label": "Additional instrumental tags",
-            "pos": [
-              -656.8500061035156,
-              -306
-            ]
-          },
-          {
-            "id": "yue2_pro_v2_vocal_tags",
-            "name": "vocal_tags",
-            "type": "STRING",
-            "linkIds": [
-              112
-            ],
-            "label": "Additional vocal tags",
-            "pos": [
-              -656.8500061035156,
-              -286
-            ]
-          },
-          {
-            "id": "yue2_pro_v2_strict",
-            "name": "strict",
-            "type": "BOOLEAN",
-            "linkIds": [
-              113
-            ],
-            "label": "Fail if no vocals",
-            "pos": [
-              -656.8500061035156,
-              -266
-            ]
-          }
-        ],
-        "outputs": [
-          {
-            "id": "0732a71d-66d1-4d9b-aae6-02256c00fab7",
-            "name": "AUDIO",
-            "type": "AUDIO",
-            "linkIds": [
-              31
-            ],
-            "localized_name": "AUDIO",
-            "pos": [
-              2954,
-              -666
-            ]
-          }
-        ],
-        "widgets": [],
-        "nodes": [
-          {
-            "id": 15,
-            "type": "CheckpointLoaderSimple",
-            "pos": [
-              -230,
-              -1090
-            ],
-            "size": [
-              420,
-              110
-            ],
-            "flags": {},
-            "order": 3,
-            "mode": 0,
-            "inputs": [
-              {
-                "localized_name": "ckpt_name",
-                "name": "ckpt_name",
-                "type": "COMBO",
-                "widget": {
-                  "name": "ckpt_name"
-                },
-                "link": 81
-              }
-            ],
-            "outputs": [
-              {
-                "localized_name": "MODEL",
-                "name": "MODEL",
-                "type": "MODEL",
-                "links": [
-                  18
-                ]
-              },
-              {
-                "localized_name": "CLIP",
-                "name": "CLIP",
-                "type": "CLIP",
-                "links": [
-                  43
-                ]
-              },
-              {
-                "localized_name": "VAE",
-                "name": "VAE",
-                "type": "VAE",
-                "links": [
-                  21
-                ]
-              }
-            ],
-            "properties": {
-              "cnr_id": "comfy-core",
-              "ver": "0.43.2",
-              "Node name for S&R": "CheckpointLoaderSimple",
-              "ue_properties": {
-                "widget_ue_connectable": {},
-                "version": "7.8",
-                "input_ue_unconnectable": {}
-              }
-            },
-            "widgets_values": [
-              "yue2_3b_int8_convrot.safetensors"
-            ],
-            "widgets_values_named": {
-              "ckpt_name": "yue2_3b_int8_convrot.safetensors"
-            }
-          },
-          {
-            "id": 25,
-            "type": "YuE2GenerateMusic",
-            "pos": [
-              650,
-              -890
-            ],
-            "size": [
-              400,
-              450
-            ],
-            "flags": {},
-            "order": 6,
-            "mode": 0,
-            "inputs": [
-              {
-                "localized_name": "clip",
-                "name": "clip",
-                "type": "CLIP",
-                "link": 43
-              },
-              {
-                "localized_name": "style",
-                "name": "style",
-                "type": "STRING",
-                "widget": {
-                  "name": "style"
-                },
-                "link": 95
-              },
-              {
-                "localized_name": "lyrics",
-                "name": "lyrics",
-                "type": "STRING",
-                "widget": {
-                  "name": "lyrics"
-                },
-                "link": 114
-              },
-              {
-                "localized_name": "abc",
-                "name": "abc",
-                "type": "STRING",
-                "widget": {
-                  "name": "abc"
-                },
-                "link": 104
-              },
-              {
-                "localized_name": "seed",
-                "name": "seed",
-                "type": "INT",
-                "widget": {
-                  "name": "seed"
-                },
-                "link": 68
-              },
-              {
-                "localized_name": "mode",
-                "name": "mode",
-                "type": "COMBO",
-                "widget": {
-                  "name": "mode"
-                },
-                "link": 105
-              },
-              {
-                "localized_name": "max_duration",
-                "name": "max_duration",
-                "type": "FLOAT",
-                "widget": {
-                  "name": "max_duration"
-                },
-                "link": 79
-              },
-              {
-                "localized_name": "temperature",
-                "name": "temperature",
-                "type": "FLOAT",
-                "widget": {
-                  "name": "temperature"
-                },
-                "link": null
-              },
-              {
-                "localized_name": "top_p",
-                "name": "top_p",
-                "type": "FLOAT",
-                "widget": {
-                  "name": "top_p"
-                },
-                "link": null
-              },
-              {
-                "localized_name": "top_k",
-                "name": "top_k",
-                "type": "INT",
-                "widget": {
-                  "name": "top_k"
-                },
-                "link": null
-              },
-              {
-                "localized_name": "repetition_penalty",
-                "name": "repetition_penalty",
-                "type": "FLOAT",
-                "widget": {
-                  "name": "repetition_penalty"
-                },
-                "link": null
-              },
-              {
-                "localized_name": "cfg_scale",
-                "name": "cfg_scale",
-                "shape": 7,
-                "type": "FLOAT",
-                "widget": {
-                  "name": "cfg_scale"
-                },
-                "link": null
-              }
-            ],
-            "outputs": [
-              {
-                "localized_name": "CONDITIONING",
-                "name": "CONDITIONING",
-                "type": "CONDITIONING",
-                "links": [
-                  49,
-                  50
-                ]
-              },
-              {
-                "localized_name": "seconds",
-                "name": "seconds",
-                "type": "FLOAT",
-                "links": [
-                  48,
-                  51
-                ]
-              }
-            ],
-            "properties": {
-              "cnr_id": "comfy-core",
-              "ver": "0.43.2",
-              "Node name for S&R": "YuE2GenerateMusic",
-              "ue_properties": {
-                "widget_ue_connectable": {},
-                "version": "7.8",
-                "input_ue_unconnectable": {}
-              }
-            },
-            "widgets_values": [
-              "",
-              "",
-              "",
-              530976807293994,
-              "fixed",
-              "melody",
-              360,
-              1,
-              0.95,
-              100,
-              1.2,
-              1
-            ],
-            "widgets_values_named": {
-              "style": "",
-              "lyrics": "",
-              "abc": "",
-              "seed": 530976807293994,
-              "control_after_generate": "fixed",
-              "mode": "melody",
-              "max_duration": 360,
-              "temperature": 1,
-              "top_p": 0.95,
-              "top_k": 100,
-              "repetition_penalty": 1.2,
-              "cfg_scale": 1
-            }
-          },
-          {
-            "id": 18,
-            "type": "ConditioningZeroOut",
-            "pos": [
-              1150,
-              -870
-            ],
-            "size": [
-              230,
-              40
-            ],
-            "flags": {},
-            "order": 4,
-            "mode": 0,
-            "inputs": [
-              {
-                "localized_name": "conditioning",
-                "name": "conditioning",
-                "type": "CONDITIONING",
-                "link": 50
-              }
-            ],
-            "outputs": [
-              {
-                "localized_name": "CONDITIONING",
-                "name": "CONDITIONING",
-                "type": "CONDITIONING",
-                "links": [
-                  26
-                ]
-              }
-            ],
-            "properties": {
-              "cnr_id": "comfy-core",
-              "ver": "0.43.2",
-              "Node name for S&R": "ConditioningZeroOut",
-              "ue_properties": {
-                "widget_ue_connectable": {},
-                "version": "7.8",
-                "input_ue_unconnectable": {}
-              }
-            }
-          },
-          {
-            "id": 23,
-            "type": "PreviewAny",
-            "pos": [
-              1150,
-              -750
-            ],
-            "size": [
-              270,
-              140
-            ],
-            "flags": {},
-            "order": 5,
-            "mode": 0,
-            "inputs": [
-              {
-                "localized_name": "source",
-                "name": "source",
-                "type": "*",
-                "link": 51
-              }
-            ],
-            "outputs": [
-              {
-                "localized_name": "STRING",
-                "name": "STRING",
-                "type": "STRING",
-                "links": null
-              }
-            ],
-            "properties": {
-              "cnr_id": "comfy-core",
-              "ver": "0.43.2",
-              "Node name for S&R": "PreviewAny",
-              "ue_properties": {
-                "widget_ue_connectable": {},
-                "version": "7.8",
-                "input_ue_unconnectable": {}
-              }
-            },
-            "widgets_values": [],
-            "widgets_values_named": {}
-          },
-          {
-            "id": 8,
-            "type": "KSampler",
-            "pos": [
-              1680,
-              -940
-            ],
-            "size": [
-              330,
-              270
-            ],
-            "flags": {},
-            "order": 1,
-            "mode": 0,
-            "inputs": [
-              {
-                "localized_name": "model",
-                "name": "model",
-                "type": "MODEL",
-                "link": 18
-              },
-              {
-                "localized_name": "positive",
-                "name": "positive",
-                "type": "CONDITIONING",
-                "link": 49
-              },
-              {
-                "localized_name": "negative",
-                "name": "negative",
-                "type": "CONDITIONING",
-                "link": 26
-              },
-              {
-                "localized_name": "latent_image",
-                "name": "latent_image",
-                "type": "LATENT",
-                "link": 8
-              },
-              {
-                "localized_name": "seed",
-                "name": "seed",
-                "type": "INT",
-                "widget": {
-                  "name": "seed"
-                },
-                "link": 69
-              },
-              {
-                "localized_name": "steps",
-                "name": "steps",
-                "type": "INT",
-                "widget": {
-                  "name": "steps"
-                },
-                "link": null
-              },
-              {
-                "localized_name": "cfg",
-                "name": "cfg",
-                "type": "FLOAT",
-                "widget": {
-                  "name": "cfg"
-                },
-                "link": null
-              },
-              {
-                "localized_name": "sampler_name",
-                "name": "sampler_name",
-                "type": "COMBO",
-                "widget": {
-                  "name": "sampler_name"
-                },
-                "link": null
-              },
-              {
-                "localized_name": "scheduler",
-                "name": "scheduler",
-                "type": "COMBO",
-                "widget": {
-                  "name": "scheduler"
-                },
-                "link": null
-              },
-              {
-                "localized_name": "denoise",
-                "name": "denoise",
-                "type": "FLOAT",
-                "widget": {
-                  "name": "denoise"
-                },
-                "link": null
-              }
-            ],
-            "outputs": [
-              {
-                "localized_name": "LATENT",
-                "name": "LATENT",
-                "type": "LATENT",
-                "links": [
-                  9
-                ]
-              }
-            ],
-            "properties": {
-              "cnr_id": "comfy-core",
-              "ver": "0.43.2",
-              "Node name for S&R": "KSampler",
-              "ue_properties": {
-                "widget_ue_connectable": {},
-                "version": "7.8",
-                "input_ue_unconnectable": {}
-              }
-            },
-            "widgets_values": [
-              42,
-              "fixed",
-              50,
-              1,
-              "dpm_2",
-              "sgm_uniform",
-              1
-            ],
-            "widgets_values_named": {
-              "seed": 42,
-              "control_after_generate": "fixed",
-              "steps": 50,
-              "cfg": 1,
-              "sampler_name": "dpm_2",
-              "scheduler": "sgm_uniform",
-              "denoise": 1
-            }
-          },
-          {
-            "id": 5,
-            "type": "EmptyYuE2LatentAudio",
-            "pos": [
-              1890,
-              -470
-            ],
-            "size": [
-              230,
-              90
-            ],
-            "flags": {},
-            "order": 0,
-            "mode": 0,
-            "inputs": [
-              {
-                "localized_name": "seconds",
-                "name": "seconds",
-                "type": "FLOAT",
-                "widget": {
-                  "name": "seconds"
-                },
-                "link": 48
-              },
-              {
-                "localized_name": "batch_size",
-                "name": "batch_size",
-                "type": "INT",
-                "widget": {
-                  "name": "batch_size"
-                },
-                "link": null
-              }
-            ],
-            "outputs": [
-              {
-                "localized_name": "LATENT",
-                "name": "LATENT",
-                "type": "LATENT",
-                "links": [
-                  8
-                ]
-              }
-            ],
-            "properties": {
-              "cnr_id": "comfy-core",
-              "ver": "0.43.2",
-              "Node name for S&R": "EmptyYuE2LatentAudio",
-              "ue_properties": {
-                "widget_ue_connectable": {},
-                "version": "7.8",
-                "input_ue_unconnectable": {}
-              }
-            },
-            "widgets_values": [
-              120,
-              1
-            ],
-            "widgets_values_named": {
-              "seconds": 120,
-              "batch_size": 1
-            }
-          },
-          {
-            "id": 9,
-            "type": "VAEDecodeAudio",
-            "pos": [
-              2060,
-              -860
-            ],
-            "size": [
-              230,
-              60
-            ],
-            "flags": {},
-            "order": 2,
-            "mode": 0,
-            "inputs": [
-              {
-                "localized_name": "samples",
-                "name": "samples",
-                "type": "LATENT",
-                "link": 9
-              },
-              {
-                "localized_name": "vae",
-                "name": "vae",
-                "type": "VAE",
-                "link": 21
-              }
-            ],
-            "outputs": [
-              {
-                "localized_name": "AUDIO",
-                "name": "AUDIO",
-                "type": "AUDIO",
-                "links": [
-                  31
-                ]
-              }
-            ],
-            "properties": {
-              "cnr_id": "comfy-core",
-              "ver": "0.43.2",
-              "Node name for S&R": "VAEDecodeAudio",
-              "ue_properties": {
-                "widget_ue_connectable": {},
-                "version": "7.8",
-                "input_ue_unconnectable": {}
-              }
-            }
-          },
-          {
-            "id": 34,
-            "type": "SeedNode",
-            "pos": [
-              730,
-              -410
-            ],
-            "size": [
-              270,
-              90
-            ],
-            "flags": {},
-            "order": 7,
-            "mode": 0,
-            "inputs": [
-              {
-                "localized_name": "seed",
-                "name": "seed",
-                "type": "INT",
-                "widget": {
-                  "name": "seed"
-                },
-                "link": 80
-              }
-            ],
-            "outputs": [
-              {
-                "localized_name": "seed",
-                "name": "seed",
-                "type": "INT",
-                "links": [
-                  68,
-                  69
-                ]
-              }
-            ],
-            "properties": {
-              "cnr_id": "comfy-core",
-              "ver": "0.43.2",
-              "Node name for S&R": "SeedNode",
-              "ue_properties": {
-                "widget_ue_connectable": {},
-                "version": "7.8",
-                "input_ue_unconnectable": {}
-              }
-            },
-            "widgets_values": [
-              0,
-              "fixed"
-            ],
-            "widgets_values_named": {
-              "seed": 0,
-              "control_after_generate": "fixed"
-            }
-          },
-          {
-            "id": 41,
-            "type": "SheetSage2AudioToABC",
-            "pos": [
-              -150,
-              -650
-            ],
-            "size": [
-              230,
-              90
-            ],
-            "flags": {},
-            "order": 8,
-            "mode": 0,
-            "inputs": [
-              {
-                "localized_name": "audio_encoder",
-                "name": "audio_encoder",
-                "type": "AUDIO_ENCODER",
-                "link": 84
-              },
-              {
-                "localized_name": "audio",
-                "name": "audio",
-                "type": "AUDIO",
-                "link": 90
-              },
-              {
-                "localized_name": "mode",
-                "name": "mode",
-                "type": "COMBO",
-                "widget": {
-                  "name": "mode"
-                },
-                "link": null
-              }
-            ],
-            "outputs": [
-              {
-                "localized_name": "abc",
-                "name": "abc",
-                "shape": 6,
-                "type": "STRING",
-                "links": [
-                  93
-                ]
-              }
-            ],
-            "properties": {
-              "cnr_id": "comfy-core",
-              "ver": "0.43.2",
-              "Node name for S&R": "SheetSage2AudioToABC",
-              "ue_properties": {
-                "widget_ue_connectable": {},
-                "version": "7.8",
-                "input_ue_unconnectable": {}
-              }
-            },
-            "widgets_values": [
-              "melody"
-            ],
-            "widgets_values_named": {
-              "mode": "melody"
-            }
-          },
-          {
-            "id": 43,
-            "type": "AudioEncoderLoader",
-            "pos": [
-              -240,
-              -920
-            ],
-            "size": [
-              420,
-              80
-            ],
-            "flags": {},
-            "order": 9,
-            "mode": 0,
-            "inputs": [
-              {
-                "localized_name": "audio_encoder_name",
-                "name": "audio_encoder_name",
-                "type": "COMBO",
-                "widget": {
-                  "name": "audio_encoder_name"
-                },
-                "link": 91
-              }
-            ],
-            "outputs": [
-              {
-                "localized_name": "AUDIO_ENCODER",
-                "name": "AUDIO_ENCODER",
-                "type": "AUDIO_ENCODER",
-                "links": [
-                  84
-                ]
-              }
-            ],
-            "properties": {
-              "cnr_id": "comfy-core",
-              "ver": "0.43.2",
-              "Node name for S&R": "AudioEncoderLoader",
-              "ue_properties": {
-                "widget_ue_connectable": {},
-                "version": "7.8",
-                "input_ue_unconnectable": {}
-              }
-            },
-            "widgets_values": [
-              "sheetsage2_bf16.safetensors"
-            ],
-            "widgets_values_named": {
-              "audio_encoder_name": "sheetsage2_bf16.safetensors"
-            }
-          },
-          {
-            "id": 44,
-            "type": "PreviewAny",
-            "pos": [
-              -546.7891180200289,
-              -503.81722338289416
-            ],
-            "size": [
-              470,
-              300
-            ],
-            "flags": {},
-            "order": 10,
-            "mode": 0,
-            "inputs": [
-              {
-                "localized_name": "source",
-                "name": "source",
-                "type": "*",
-                "link": 93
-              }
-            ],
-            "outputs": [
-              {
-                "localized_name": "STRING",
-                "name": "STRING",
-                "type": "STRING",
-                "links": [
-                  103
-                ]
-              }
-            ],
-            "properties": {
-              "cnr_id": "comfy-core",
-              "ver": "0.43.2",
-              "Node name for S&R": "PreviewAny",
-              "ue_properties": {
-                "widget_ue_connectable": {},
-                "version": "7.8",
-                "input_ue_unconnectable": {}
-              }
-            },
-            "widgets_values": [],
-            "widgets_values_named": {}
-          },
-          {
-            "id": 47,
-            "type": "YuE2AutoVocalPRO",
-            "pos": [
-              -48.28121092890727,
-              -504.34094465626026
-            ],
-            "size": [
-              490,
-              530
-            ],
-            "flags": {},
-            "order": 11,
-            "mode": 0,
-            "inputs": [
-              {
-                "localized_name": "abc",
-                "name": "abc",
-                "type": "STRING",
-                "link": 103
-              },
-              {
-                "localized_name": "lyrics",
-                "name": "lyrics",
-                "type": "STRING",
-                "link": 96
-              },
-              {
-                "localized_name": "section_policy",
-                "name": "section_policy",
-                "type": "COMBO",
-                "widget": {
-                  "name": "section_policy"
-                },
-                "link": 108
-              },
-              {
-                "localized_name": "instrumental_handling",
-                "name": "instrumental_handling",
-                "type": "COMBO",
-                "widget": {
-                  "name": "instrumental_handling"
-                },
-                "link": 109
-              },
-              {
-                "localized_name": "existing_vocal",
-                "name": "existing_vocal",
-                "type": "COMBO",
-                "widget": {
-                  "name": "existing_vocal"
-                },
-                "link": 110
-              },
-              {
-                "localized_name": "instrumental_tags",
-                "name": "instrumental_tags",
-                "type": "STRING",
-                "widget": {
-                  "name": "instrumental_tags"
-                },
-                "link": 111
-              },
-              {
-                "localized_name": "vocal_tags",
-                "name": "vocal_tags",
-                "type": "STRING",
-                "widget": {
-                  "name": "vocal_tags"
-                },
-                "link": 112
-              },
-              {
-                "localized_name": "strict",
-                "name": "strict",
-                "type": "BOOLEAN",
-                "widget": {
-                  "name": "strict"
-                },
-                "link": 113
-              },
-              {
-                "localized_name": "lyrics_alignment",
-                "name": "lyrics_alignment",
-                "type": "COMBO",
-                "widget": {
-                  "name": "lyrics_alignment"
-                },
-                "link": null
-              }
-            ],
-            "outputs": [
-              {
-                "localized_name": "abc",
-                "name": "abc",
-                "type": "STRING",
-                "links": [
-                  104,
-                  115
-                ]
-              },
-              {
-                "localized_name": "lyrics",
-                "name": "lyrics",
-                "type": "STRING",
-                "links": [
-                  114
-                ]
-              },
-              {
-                "localized_name": "report",
-                "name": "report",
-                "type": "STRING",
-                "links": [
-                  106
-                ]
-              }
-            ],
-            "properties": {
-              "Node name for S&R": "YuE2AutoVocalPRO",
-              "ue_properties": {
-                "widget_ue_connectable": {},
-                "version": "7.8",
-                "input_ue_unconnectable": {}
-              }
-            },
-            "widgets_values": [
-              "all_of_rest",
-              "replace_with_rests",
-              "preserve",
-              "",
-              "",
-              true,
-              "match_sections"
-            ],
-            "widgets_values_named": {
-              "section_policy": "all_of_rest",
-              "instrumental_handling": "replace_with_rests",
-              "existing_vocal": "preserve",
-              "instrumental_tags": "",
-              "vocal_tags": "",
-              "strict": true,
-              "lyrics_alignment": "match_sections"
-            }
-          },
-          {
-            "id": 48,
-            "type": "PreviewAny",
-            "pos": [
-              791.5246388267915,
-              -34.95507618707308
-            ],
-            "size": [
-              465,
-              190
-            ],
-            "flags": {},
-            "order": 12,
-            "mode": 0,
-            "inputs": [
-              {
-                "localized_name": "source",
-                "name": "source",
-                "type": "*",
-                "link": 106
-              }
-            ],
-            "outputs": [
-              {
-                "localized_name": "STRING",
-                "name": "STRING",
-                "type": "STRING",
-                "links": []
-              }
-            ],
-            "properties": {
-              "cnr_id": "comfy-core",
-              "ver": "0.43.2",
-              "Node name for S&R": "PreviewAny",
-              "ue_properties": {
-                "widget_ue_connectable": {},
-                "version": "7.8",
-                "input_ue_unconnectable": {}
-              }
-            },
-            "widgets_values": [],
-            "widgets_values_named": {}
-          },
-          {
-            "id": 49,
-            "type": "PreviewAny",
-            "pos": [
-              810,
-              -335
-            ],
-            "size": [
-              465,
-              190
-            ],
-            "flags": {},
-            "order": 13,
-            "mode": 0,
-            "inputs": [
-              {
-                "localized_name": "source",
-                "name": "source",
-                "type": "*",
-                "link": 115
-              }
-            ],
-            "outputs": [
-              {
-                "localized_name": "STRING",
-                "name": "STRING",
-                "type": "STRING",
-                "links": null
-              }
-            ],
-            "properties": {
-              "cnr_id": "comfy-core",
-              "ver": "0.43.2",
-              "Node name for S&R": "PreviewAny",
-              "ue_properties": {
-                "widget_ue_connectable": {},
-                "version": "7.8",
-                "input_ue_unconnectable": {}
-              }
-            },
-            "widgets_values": [],
-            "widgets_values_named": {}
-          }
-        ],
-        "groups": [
-          {
-            "id": 3,
-            "title": "Model",
-            "bounding": [
-              -330,
-              -1180,
-              620,
-              430
-            ],
-            "color": "#3f789e",
-            "flags": {}
-          },
-          {
-            "id": 2,
-            "title": "SheetSage2 → Auto Vocal PRO V2 ABC",
-            "bounding": [
-              -330,
-              -730,
-              1100,
-              620
-            ],
-            "color": "#3f789e",
-            "flags": {}
-          },
-          {
-            "id": 6,
-            "title": "Conditioning",
-            "bounding": [
-              390,
-              -1080,
-              1160,
-              790
-            ],
-            "color": "#3f789e",
-            "flags": {}
-          },
-          {
-            "id": 4,
-            "title": "Duration",
-            "bounding": [
-              1640,
-              -570,
-              720,
-              280
-            ],
-            "color": "#3f789e",
-            "flags": {}
-          },
-          {
-            "id": 5,
-            "title": "Sampling & Decode",
-            "bounding": [
-              1640,
-              -1080,
-              720,
-              480
-            ],
-            "color": "#3f789e",
-            "flags": {}
-          }
-        ],
-        "links": [
-          {
-            "id": 43,
-            "origin_id": 15,
-            "origin_slot": 1,
-            "target_id": 25,
-            "target_slot": 0,
-            "type": "CLIP"
-          },
-          {
-            "id": 50,
-            "origin_id": 25,
-            "origin_slot": 0,
-            "target_id": 18,
-            "target_slot": 0,
-            "type": "CONDITIONING"
-          },
-          {
-            "id": 51,
-            "origin_id": 25,
-            "origin_slot": 1,
-            "target_id": 23,
-            "target_slot": 0,
-            "type": "FLOAT"
-          },
-          {
-            "id": 18,
-            "origin_id": 15,
-            "origin_slot": 0,
-            "target_id": 8,
-            "target_slot": 0,
-            "type": "MODEL"
-          },
-          {
-            "id": 49,
-            "origin_id": 25,
-            "origin_slot": 0,
-            "target_id": 8,
-            "target_slot": 1,
-            "type": "CONDITIONING"
-          },
-          {
-            "id": 26,
-            "origin_id": 18,
-            "origin_slot": 0,
-            "target_id": 8,
-            "target_slot": 2,
-            "type": "CONDITIONING"
-          },
-          {
-            "id": 8,
-            "origin_id": 5,
-            "origin_slot": 0,
-            "target_id": 8,
-            "target_slot": 3,
-            "type": "LATENT"
-          },
-          {
-            "id": 48,
-            "origin_id": 25,
-            "origin_slot": 1,
-            "target_id": 5,
-            "target_slot": 0,
-            "type": "FLOAT"
-          },
-          {
-            "id": 9,
-            "origin_id": 8,
-            "origin_slot": 0,
-            "target_id": 9,
-            "target_slot": 0,
-            "type": "LATENT"
-          },
-          {
-            "id": 21,
-            "origin_id": 15,
-            "origin_slot": 2,
-            "target_id": 9,
-            "target_slot": 1,
-            "type": "VAE"
-          },
-          {
-            "id": 31,
-            "origin_id": 9,
-            "origin_slot": 0,
-            "target_id": -20,
-            "target_slot": 0,
-            "type": "AUDIO"
-          },
-          {
-            "id": 68,
-            "origin_id": 34,
-            "origin_slot": 0,
-            "target_id": 25,
-            "target_slot": 4,
-            "type": "INT"
-          },
-          {
-            "id": 69,
-            "origin_id": 34,
-            "origin_slot": 0,
-            "target_id": 8,
-            "target_slot": 4,
-            "type": "INT"
-          },
-          {
-            "id": 80,
-            "origin_id": -10,
-            "origin_slot": 3,
-            "target_id": 34,
-            "target_slot": 0,
-            "type": "INT"
-          },
-          {
-            "id": 81,
-            "origin_id": -10,
-            "origin_slot": 4,
-            "target_id": 15,
-            "target_slot": 0,
-            "type": "COMBO"
-          },
-          {
-            "id": 84,
-            "origin_id": 43,
-            "origin_slot": 0,
-            "target_id": 41,
-            "target_slot": 0,
-            "type": "AUDIO_ENCODER"
-          },
-          {
-            "id": 90,
-            "origin_id": -10,
-            "origin_slot": 5,
-            "target_id": 41,
-            "target_slot": 1,
-            "type": "AUDIO"
-          },
-          {
-            "id": 91,
-            "origin_id": -10,
-            "origin_slot": 6,
-            "target_id": 43,
-            "target_slot": 0,
-            "type": "COMBO"
-          },
-          {
-            "id": 93,
-            "origin_id": 41,
-            "origin_slot": 0,
-            "target_id": 44,
-            "target_slot": 0,
-            "type": "STRING"
-          },
-          {
-            "id": 103,
-            "origin_id": 44,
-            "origin_slot": 0,
-            "target_id": 47,
-            "target_slot": 0,
-            "type": "STRING"
-          },
-          {
-            "id": 104,
-            "origin_id": 47,
-            "origin_slot": 0,
-            "target_id": 25,
-            "target_slot": 3,
-            "type": "STRING"
-          },
-          {
-            "id": 106,
-            "origin_id": 47,
-            "origin_slot": 2,
-            "target_id": 48,
-            "target_slot": 0,
-            "type": "STRING"
-          },
-          {
-            "id": 95,
-            "origin_id": -10,
-            "origin_slot": 0,
-            "target_id": 25,
-            "target_slot": 1,
-            "type": "STRING"
-          },
-          {
-            "id": 96,
-            "origin_id": -10,
-            "origin_slot": 1,
-            "target_id": 47,
-            "target_slot": 1,
-            "type": "STRING"
-          },
-          {
-            "id": 79,
-            "origin_id": -10,
-            "origin_slot": 2,
-            "target_id": 25,
-            "target_slot": 6,
-            "type": "FLOAT"
-          },
-          {
-            "id": 105,
-            "origin_id": -10,
-            "origin_slot": 7,
-            "target_id": 25,
-            "target_slot": 5,
-            "type": "COMBO"
-          },
-          {
-            "id": 114,
-            "origin_id": 47,
-            "origin_slot": 1,
-            "target_id": 25,
-            "target_slot": 2,
-            "type": "STRING"
-          },
-          {
-            "id": 115,
-            "origin_id": 47,
-            "origin_slot": 0,
-            "target_id": 49,
-            "target_slot": 0,
-            "type": "STRING"
-          },
-          {
-            "id": 108,
-            "origin_id": -10,
-            "origin_slot": 8,
-            "target_id": 47,
-            "target_slot": 2,
-            "type": "COMBO"
-          },
-          {
-            "id": 109,
-            "origin_id": -10,
-            "origin_slot": 9,
-            "target_id": 47,
-            "target_slot": 3,
-            "type": "COMBO"
-          },
-          {
-            "id": 110,
-            "origin_id": -10,
-            "origin_slot": 10,
-            "target_id": 47,
-            "target_slot": 4,
-            "type": "COMBO"
-          },
-          {
-            "id": 111,
-            "origin_id": -10,
-            "origin_slot": 11,
-            "target_id": 47,
-            "target_slot": 5,
-            "type": "STRING"
-          },
-          {
-            "id": 112,
-            "origin_id": -10,
-            "origin_slot": 12,
-            "target_id": 47,
-            "target_slot": 6,
-            "type": "STRING"
-          },
-          {
-            "id": 113,
-            "origin_id": -10,
-            "origin_slot": 13,
-            "target_id": 47,
-            "target_slot": 7,
-            "type": "BOOLEAN"
-          }
-        ],
-        "extra": {
-          "ue_links": [],
-          "pixaromaGroups": [],
-          "links_added_by_ue": []
-        }
-      }
-    ]
-  },
+  "groups": [
+    {
+      "id": 1,
+      "title": "01  INPUTS AND PARAMETERS",
+      "bounding": [
+        -20,
+        25,
+        810,
+        1670
+      ],
+      "color": "#355D88",
+      "flags": {}
+    },
+    {
+      "id": 2,
+      "title": "02  MUSIC, ABC AND REPLACEMENT LYRICS",
+      "bounding": [
+        790,
+        -30,
+        3720,
+        1390
+      ],
+      "color": "#426A58",
+      "flags": {}
+    },
+    {
+      "id": 3,
+      "title": "03  REFERENCE VOICE · NATIVE YUE2",
+      "bounding": [
+        875,
+        1730,
+        2020,
+        1200
+      ],
+      "color": "#78644C",
+      "flags": {}
+    },
+    {
+      "id": 4,
+      "title": "04  OUTPUT AND QUALITY CONTROL",
+      "bounding": [
+        4530,
+        -30,
+        1780,
+        1250
+      ],
+      "color": "#66528A",
+      "flags": {}
+    }
+  ],
   "config": {},
   "extra": {
     "frontendVersion": "1.52.7",
     "ue_links": [],
     "ds": {
-      "scale": 0.8593049328459315,
+      "scale": 0.6016573124175534,
       "offset": [
-        -691.3406372175443,
-        478.6025619708327
+        -1026.544767035698,
+        277.3455405963147
       ]
     },
-    "links_added_by_ue": []
+    "links_added_by_ue": [],
+    "yue2_workflow_layout": "native_cover_single_layout"
   },
   "version": 0.4
 }

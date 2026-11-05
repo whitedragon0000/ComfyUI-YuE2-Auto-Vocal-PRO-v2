@@ -1,113 +1,61 @@
-# YuE2 Music Cover — Auto Vocal PRO v2
+# YuE2 Auto Vocal PRO — ComfyUI
 
-ComfyUI **Music Cover (YuE2)** workflow plus a custom node that promotes the `Ins` melody from SheetSage2 to `Vocal`, analyzes whether the new lyrics cover the extracted melody, and can align section labels or **optionally** repeat *only* lyrics the user wrote. No external Python dependencies.
+Custom node autonomo per utilizzare i nodi ufficiali **YuE2** e **SheetSage2** dentro ComfyUI, senza WSL, servizi esterni, Seed-VC, RVC o conversione vocale post-generazione. Il ramo **Reference Voice** segue l'approccio `Ornn8/yue2-cover`: spartito trascritto dalla canzone sorgente, Lyrics nuove divise per sezioni, campione della voce di riferimento codificato come prefisso semantico nativo YuE2.
 
-**Stable names — no renames:** workflow `YuE2_Cover_AutoVocal_PRO_V2.json`, subgraph `Music Cover (YuE2) — Auto Vocal PRO v2`, custom node class `YuE2AutoVocalPRO`, directory `custom_nodes/yue2_auto_vocal_pro/`.
+## Autore e riconoscimenti
 
-## Structure
+**White Dragon (Francesco Durante)** ha realizzato la **reimplementazione ComfyUI di `yue2-cover` per la funzionalità Reference Voice**, integrandola nel workflow YuE2 Auto Vocal PRO. Questo ramo utilizza il meccanismo nativo YuE2 di condizionamento mediante prefisso semantico; non usa Seed-VC, RVC né conversione vocale esterna.
 
-```text
-YuE2_Cover_AutoVocal_PRO_V2.json
-README.md
-.gitignore
-custom_nodes/
-  yue2_auto_vocal_pro/
-    __init__.py           # ComfyUI registration and input/output signature
-    engine.py             # ABC Ins → Vocal routing; native Z4| rests
-    alignment.py          # section matching and lyric coverage diagnostics
-tests/
-    test_engine.py
-    test_alignment.py
-    test_workflow.py
-```
+**Progetto originale di riferimento:** [`Ornn8/yue2-cover`](https://github.com/Ornn8/yue2-cover), a cui spettano i crediti per l'implementazione originale. Il parser e il compositore ABC riutilizzati sono conservati in `vendor/yue2_cover_main/` insieme alla relativa licenza Apache-2.0. La reimplementazione ComfyUI e il progetto originale sono componenti distinti; questa attribuzione non implica che l'autore del progetto originale abbia sviluppato o approvato il presente custom node.
 
-The distributable ZIP **does not contain model weights, MP3/audio, extracted soundtrack ABC, generated songs, API keys or user lyrics**. Replace the reference filename in `LoadAudio` with your own audio after importing.
+## Installazione pulita
 
-## Install (Windows / ComfyUI)
+1. Chiudi ComfyUI. Sposta **fuori** da `custom_nodes/` ogni copia precedente di `ComfyUI-YuE2-Auto-Vocal-PRO-v2` (non lasciare due copie caricabili).
+2. Estrai la cartella `ComfyUI-YuE2-Auto-Vocal-PRO-v2` da questo ZIP direttamente in `ComfyUI/custom_nodes/`.
+3. I file `yue2_3b_bf16.safetensors`, SheetSage2, MERT-v2-FullSong, tokenizer head joint-v9 e LoRA NAR devono rimanere nelle cartelle modelli standard di ComfyUI; **non** sono inclusi nello ZIP.
+4. Installa `requirements.txt` **solo se mancano dipendenze**, usando il Python già integrato in ComfyUI. Non reinstallare Torch/CUDA; non installare `yue2-infer`.
+5. Riavvia ComfyUI, apri `YuE2_Cover_AutoVocal_PRO_V2.json` e scegli canzone sorgente e campione Reference Voice. Compila Lyrics e Style.
 
-1. Stop ComfyUI fully.
-2. Copy the *contents* of `custom_nodes/yue2_auto_vocal_pro/` into the pre-existing `ComfyUI/custom_nodes/yue2_auto_vocal_pro/` directory, overwriting the existing Python files. **Do not rename the directory.**
-3. Restart ComfyUI, then load **`YuE2_Cover_AutoVocal_PRO_V2.json`**.
-4. In `LoadAudio`, load a reference audio that you have rights to use. Enter **Style** in the subgraph widget and your **Lyrics** in the separate multiline node (both ship empty). The workflow retains a 190-second maximum duration, `melody` mode and `all_of_rest` section policy.
-5. The external `Seed — randomize / fixed` node defaults to **randomize**. Use **fixed** and a numeric seed when comparing musical results.
-6. Inside the subgraph, examine `PreviewAny` **44** (source ABC), **49** (transformed ABC), and **48** (conversion + lyric-coverage report).
+## Workflow incluso
 
-**Important:** Style and Lyrics are intentionally blank for version control. With `strict = true` (retained from the working baseline), executing an empty Lyrics field is expected to fail with a clear validation error. Enter lyrics before generating.
+Quattro aree, un solo workflow, con i titoli in inglese: **Inputs and Parameters**, **Music, ABC and Replacement Lyrics**, **Reference Voice**, **Output and Quality Control**. Il selettore finale è inizialmente su `reference_voice`. È disponibile anche il percorso `standard` per un confronto a parità di testo sorgente e spartito.
 
-You must have the ComfyUI YuE2 native nodes and its SheetSage2/audio encoder available, and the corresponding model checkpoint files installed. Model file names and all prior node/link IDs are preserved from the user's corrected baseline.
+Il nodo `ABC + Lyrics · Alignment` riceve l'ABC prodotto da SheetSage2. Il testo scritto nel campo **Replacement Lyrics** è l'unico testo target da fornire ai generatori. Le etichette `[Verse]`, `[Chorus]` e simili orientano l'assegnazione; le sezioni strumentali prive di Lyrics non devono essere riempite con parole inventate dal planner. Una melodia valida con molte note e poche parole **non è rifiutata** per un rapporto sillabe/note.
 
-## What's new: lyric alignment (inside the existing custom node)
+`existing_vocal=preserve` conserva la traccia Vocal originale nello spartito; `overwrite` può convertire una parte strumentale compatibile in Vocal. Entrambe le opzioni, insieme a `section_policy`, `instrumental_handling` e `vocal_melody_mode`, sono propagate anche all'eventuale validatore del percorso ABC alternativo. Non cambiano il contenuto testuale delle Lyrics dell'utente.
 
-Only **one new internal widget** has been added to `YuE2AutoVocalPRO`, without adding ports or nodes to the outer workflow:
+`max_duration` è **un limite massimo**. Se il brano sorgente rientra nel limite, non viene accorciato in funzione del conteggio delle sillabe. Se supera il limite, il planner può scegliere un **estratto musicale contiguo e valido**, indicando nel report che non si tratta della cover integrale. Non altera le parole per farle rientrare nella durata. Se nessun estratto coerente è disponibile, viene segnalato un vincolo reale invece di creare una melodia arbitraria o ignorare il limite.
 
-| `lyrics_alignment` | Effect | Changes the text you wrote? |
-|---|---|---|
-| `match_sections` **(default)** | Estimates section coverage and relabels ABC `%` vocal sections to match Lyrics `[Section]` **only when their counts match** | **No** |
-| `report_only` | Outputs the original routed ABC and original Lyrics, appending diagnostics only | **No** |
-| `repeat_existing` | Same section alignment; additionally repeats the *exact existing lines* to target about 2 bars per lyric line (maximum 8 repetitions), **only when the number of vocal and lyric sections matches** | **Yes — explicitly opt-in** |
+**Pronuncia e intelligibilità:** la fedeltà testuale (stesse parole in ingresso) non implica dizione corretta (sillabe articolate). Il report di pianificazione contiene `diction_advisory`: parole/s, sillabe stimate/s e sillabe stimate per attacco di nota, calcolate separatamente per sezione ABC. Se una sezione è troppo densa, viene segnalata come **pressione articolatoria potenziale** senza modificare, accorciare o inventare il testo. Il Fidelity Audit aggiunge `diction_review` quando Whisper è disponibile, ma non confonde i suoi errori di riconoscimento con una dimostrata pronuncia difettosa. Nessun filtro sul waveform può garantire una dizione corretta o sostituire l'ascolto.
 
-The `repeat_existing` option does **not** create or paraphrase words, and never changes or generates musical notes. It may be inappropriate for narrative lyrics; evaluate the text before using it. Automatic syllable-to-note synchronization is **not implemented**; YuE2 itself determines phrasing. All numerical coverage values (estimated syllables, notes per syllable, bars per line) are **heuristics**, not a phonetic aligner or a guarantee against vocalizing "la la la".
+**Audio vuoto:** l'Audit verifica che l'audio selezionato contenga campioni finiti e un segnale misurabile prima di consegnarlo al salvataggio. Un tensor realmente vuoto, NaN/Inf o silenzioso viene rifiutato; un brano con porzioni ampiamente silenziose viene segnalato mediante RMS su finestre campionate. `report_only` non disabilita la protezione contro l'audio completamente silenzioso.
 
-For instance, when the routed score has `% verse` followed by a later `% verse` but the user has `[Verse]` and `[Chorus]`, `match_sections` changes the **second score comment** to `% chorus` if those are the only two vocal sections. Intro, interlude, solo and outro remain instrumental with `all_of_rest`. If there are more/fewer lyrical sections than vocal sections, the node warns instead of guessing the mapping.
+**Overwrite e legature:** i gruppi collegati da legature su *entrambe* le voci sono considerati congiuntamente. Se la conversione non può preservare battute, tonalità, accordi e validità del parser, viene annullata per l'intero ABC e riportata come rollback: lo spartito sorgente resta valido, ma la conversione richiesta potrebbe non essere stata completata. Verificare l'avviso; non scambiare un rollback per un overwrite riuscito.
 
-## Existing options (preserved)
+Il workflow incluso usa esattamente la disposizione del file fornito dall'utente (`YuE2_Cover_AutoVocal_PRO_V2(3).json`), conservandone posizioni, parametri musicali e collegamenti; tutti i titoli e i gruppi sono in inglese, i due `LoadAudio` e il campo Lyrics sono **vuoti** fino alla selezione dell'utente; il formato **MP3 di uscita** rimane intenzionalmente selezionato. I soli valori serializzati incoerenti nei widget dell'Audit e dell'Alignment sono normalizzati ai tipi richiesti dal codice, senza modificare la topologia.
 
-- `section_policy`: `all_of_rest` (default, excludes instrumental-intent sections), `verses_and_choruses`, `all_sections`.
-- `instrumental_handling`: `replace_with_rests` (default, native multimeasure `Z4|`), `keep_original`.
-- `existing_vocal`: `preserve` or `overwrite`. The saved outer workflow currently uses `overwrite` as in the user baseline.
-- `instrumental_tags` / `vocal_tags`: optional comma/newline-separated overrides **for classifying the ABC sections**, not text instructions to YuE2.
-- `strict`: boolean; raises on empty lyrics or a complete lack of eligible converted/already-vocal content.
-- `planning_mode`: native YuE2 `melody` (default) / `full` switch; other YuE2, sampler and VAE controls are unchanged.
+Il workflow usa il **prefisso Reference Voice nativo di YuE2**, non sistemi esterni. Se il riferimento induce YuE2 a riprendere parole vecchie, si tratta di un problema di **fedeltà acustica** che non è risolvibile o escludibile con i soli controlli simbolici.
 
-### How to write Lyrics
+## Vocal Fidelity Audit
 
-Use section headers with actual sung words underneath, e.g.:
+Il nodo `Final Audio · Vocal Fidelity Audit` è collegato **dopo** il selettore Standard/Reference Voice e prima del salvataggio. Analizza quindi l'**audio selezionato**, e il JSON dichiara quale percorso è stato auditato. `report_only` non blocca il salvataggio quando Whisper non è disponibile o la sua trascrizione è incerta; `fail_closed` è una scelta esplicita che può rifiutare la generazione per evidenze insufficienti. Whisper sui brani cantati è imperfetto: un audit favorevole non garantisce che ogni parola venga cantata correttamente.
 
-```text
-[Verse]
-First sung line
-Second sung line
+## Diagnostica forense
 
-[Chorus]
-First chorus line
-Second chorus line
-```
+Lo strumento è integrato nel custom node e crea checkpoint ZIP sotto:
 
-These are **illustrative only**; the JSON has no sample lyrics. Avoid using an eight-line lyric for ~60 bars of singing without checking coverage. Matching the original lyric phrasing and syllable counts typically helps covers. `[Guitar Solo]` and other custom tags can remain as written, but YuE2 does **not** promise Suno-like interpretation of arbitrary tags. `repeat_existing` repeats lines as text only; it does not create new ABC phrases or split existing measures.
+`ComfyUI/output/yue2_forensic/`
 
-## Architecture and unchanged connections
+Nel workflow consegnato `forensic_replay=true` è **attivo** nei due nodi principali per una prova diagnostica riproducibile. **Attenzione alla riservatezza:** in questa modalità gli ZIP locali contengono ABC, Lyrics, Style e copia del codice Python necessario al replay in chiaro; **non** contengono audio, tensori audio né pesi dei modelli. Prima di condividere lo ZIP, controlla le informazioni. Per usare soltanto hash e struttura degli input, imposta `forensic_replay=false` nei due nodi.
 
-```text
-LoadAudio ─> SheetSage2AudioToABC ─> PreviewAny(44)
-                                               └─> YuE2AutoVocalPRO(47)
-                                                      ├─> PreviewAny(49): ABC
-                                                      ├─> PreviewAny(48): report
-                                                      ├─> YuE2GenerateMusic.abc
-                                                      └─> YuE2GenerateMusic.lyrics
-Lyrics node(50) ─> subgraph ─> YuE2AutoVocalPRO.lyrics
-SeedNode(51) ──> subgraph ─> SeedNode(34) ─> YuE2GenerateMusic + KSampler
-YuE2GenerateMusic ─> KSampler ─> VAEDecodeAudio ─> SaveAudioAdvanced
-```
+Quando un errore avviene prima della generazione audio, il checkpoint del nodo contiene già lo spartito, i parametri e gli eventuali errori. Se il fallimento avviene nel codice nativo di ComfyUI, rimane disponibile l'ultimo checkpoint del nostro plugin e va allegato anche il traceback della console. Gli hash dei sorgenti ufficiali locali possono essere confrontati con la versione pubblica, senza supporre che siano identici.
 
-The outer subgraph input count, all link IDs, all node IDs and the subgraph identifier are preserved. The only modification inside the node layout is appending the `lyrics_alignment` widget to the existing node 47. Existing exports/ports `abc`, `lyrics`, `report` are unchanged.
+## Verifiche e limiti della distribuzione
 
-## Verification
+La build è stata verificata senza pesi con matrice dei selettori, simulazione dei grafi, regressioni, stress a due seed e controlli di topologia, oltre a test del codice estratto dallo ZIP. Sono controlli del **flusso simbolico**, non dell'inferenza reale YuE2 sulla tua RTX 5090. Input impossibili possono comportare un rifiuto di dominio esplicito: l'obiettivo è evitare eccezioni *inattese*, non promettere che qualsiasi ABC sia musicalmente valido.
 
-From the repository root:
+**Non è ancora certificata la fedeltà acustica delle Lyrics in Reference Voice**: serve almeno una generazione effettiva, ascolto, report dell'audit e, se necessario, ZIP forense.
 
-```bash
-python -m unittest discover -s tests -v
-```
+## Codice sorgente e licenze
 
-The tests use **synthetic musical fixtures**, not copyrighted reference melodies. They cover note routing, multibar rests, chord retention, instrumentation sections, lyrics preservation and opt-in repeating, warnings, JSON input/links and unchanged interface identities. The test suite checks the **Python code and workflow structure**, but is not an end-to-end acoustic test on ComfyUI or a quality guarantee.
-
-If the generated audio still contains non-lexical vocalizations, inspect PreviewAny(48) for `bars_per_line`, `estimated_syllables`, and `notes_per_estimated_syllable`, then try a lyric with more complete lines matching the melodic phrases, or explicitly select `repeat_existing` for a controlled experiment. Run with a fixed seed to compare conditions. Note that `max_duration` is a ceiling; the song may end early and long prompts/ABC can reduce the effective token budget.
-
-## References
-
-- [ComfyUI YuE2 Music Generation Guide](https://docs.comfy.org/tutorials/audio/yue2/yue2)
-- [YuE ABC editing reference](https://github.com/multimodal-art-projection/YuE/blob/main/skills/yue2-music/references/abc-editing.md)
-
-## Version-control guidance
-
-No Git remote, token or personal Git account is included. Create a repository in your own Git hosting service, commit these files, and keep locally installed checkpoints and source audio outside Git. `.gitignore` excludes common generated Python and ComfyUI artifacts.
+Il parser e il compositore ABC riutilizzati da `Ornn8/yue2-cover` sono vendorizzati in `vendor/yue2_cover_main/` con la licenza Apache-2.0 originale. I modelli YuE2, SheetSage2 e tokenizer hanno licenze proprie, non incluse nello ZIP. Consulta le condizioni dei modelli e detieni i diritti necessari per i brani e i campioni vocali utilizzati.

@@ -18,11 +18,15 @@ VOCAL_LINES = re.compile(r"[^\W\d_]+", re.UNICODE)
 VOWEL_GROUPS = re.compile(r"[aeiouàáèéìíòóùú]+", re.I)
 CANONICAL = (
     ('pre chorus', 'pre chorus'), ('prechorus', 'pre chorus'),
+    ('pre ritornello', 'pre chorus'), ('preritornello', 'pre chorus'),
+    ('pre coro', 'pre chorus'), ('precoro', 'pre chorus'),
     ('post chorus', 'post chorus'), ('postchorus', 'post chorus'),
     ('final chorus', 'chorus'), ('chorus', 'chorus'), ('ritornello', 'chorus'),
+    ('coro', 'chorus'),
     ('verse', 'verse'), ('strofa', 'verse'), ('bridge', 'bridge'), ('ponte', 'bridge'),
     ('refrain', 'chorus'), ('hook', 'hook'), ('rap', 'rap'),
-    ('spoken', 'spoken'), ('outro', 'outro'), ('intro', 'intro'),
+    ('spoken', 'spoken'), ('interludio', 'interlude'), ('interlude', 'interlude'),
+    ('outro', 'outro'), ('intro', 'intro'),
 )
 
 @dataclass
@@ -49,6 +53,13 @@ def _strip_abc_fragments(s: str) -> str:
     s = re.sub(r'\[(?:[KMLQ]:)[^\]]*\]', '', s)
     s = re.sub(r'![^!]*!', '', s)
     return s
+
+
+def _expanded_bar_count(line: str) -> int:
+    """The same expanded Z2/Z3/Z4 convention as the native ABC parser."""
+    music = CHORD.sub('', line.strip()).rstrip('|')
+    return sum(int(match.group(1) or '1') if (match := re.fullmatch(r'Z([2-4])?', b.strip())) else 1
+               for b in music.split('|') if b.strip())
 
 
 def score_runs(abc: str) -> list[ScoreRun]:
@@ -84,7 +95,7 @@ def score_runs(abc: str) -> list[ScoreRun]:
             run = ScoreRun(None, '<unlabeled>')
             runs.append(run)
         bars = split_bars(line)
-        run.bars += len(bars)
+        run.bars += _expanded_bar_count(line)
         run.onsets += len(TOKEN.findall(_strip_abc_fragments(line)))
     return [r for r in runs if r.bars]
 
