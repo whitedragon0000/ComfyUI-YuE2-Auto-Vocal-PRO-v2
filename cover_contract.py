@@ -12,6 +12,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 import math
+import re
 
 from .alignment import _canonical, lyric_parts
 from .lyric_contract import _tokens, measure
@@ -48,6 +49,46 @@ def _candidate_starts(abc: str):
         yield '\n'.join(lines[:ordered[i+1] + 1]) + '\n', i // 2 + 1
 
 
+def _fit_whole_score_by_tempo(abc: str, original_s: float, max_duration: float,
+                              *, max_bpm_increase: float = 0.08):
+    """Fit a small duration overflow by changing the *header BPM only*.
+
+    Native YuE2 accepts integer Q:1/4 BPM. Never touch note/rest events,
+    meter, keys, section order or lyrics. Fail cleanly if >8% is needed.
+    The parser is the final authority: check the entire event inventory.
+    """
+    if max_duration <= 0 or not math.isfinite(max_duration):
+        return None
+    parsed = parse_abc(abc)
+    original_bpm = parsed.bpm
+    needed = max(original_bpm + 1, math.ceil(original_bpm * original_s / max_duration - 1e-9))
+    if needed / original_bpm > 1.0 + max_bpm_increase + 1e-12:
+        return None
+    lines = abc.splitlines(keepends=True)
+    if len(lines) < 8 or not re.fullmatch(r'Q:1/4=\d+\r?\n?', lines[4]):
+        return None
+    newline = '\r\n' if lines[4].endswith('\r\n') else '\n' if lines[4].endswith('\n') else ''
+    lines[4] = f'Q:1/4={needed}' + newline
+    candidate = ''.join(lines)
+    reparsed = parse_abc(candidate)
+    for voice in ('Vocal', 'Ins'):
+        before, after = parsed.voices[voice], reparsed.voices[voice]
+        if (before.notes != after.notes or before.chords != after.chords or
+            before.bars != after.bars or before.keys != after.keys or
+            before.time != after.time):
+            raise CoverContractError('Tempo-only fit changed native score events')
+    fitted_s = float(reparsed.voices['Vocal'].time * 60 / reparsed.bpm)
+    if fitted_s > max_duration + 1e-6:
+        return None
+    return candidate, {
+        'action': 'tempo_fit_full_score', 'original_seconds': round(original_s, 3),
+        'selected_seconds': round(fitted_s, 3), 'excerpt': False,
+        'original_bpm': original_bpm, 'selected_bpm': needed,
+        'bpm_increase_percent': round(100.0 * (needed / original_bpm - 1.0), 4),
+        'note_events_modified': False, 'section_order_preserved': True,
+        'warning': 'Full score retained; playback tempo increased by up to 8% to fit the maximum.'}
+
+
 def _fit_only_real_duration(abc: str, lyrics: str, max_duration: float) -> tuple[str, dict]:
     """Keep a playable full score or a native group excerpt under the explicit cap.
 
@@ -58,6 +99,11 @@ def _fit_only_real_duration(abc: str, lyrics: str, max_duration: float) -> tuple
     if max_duration <= 0 or original_s <= max_duration + 1e-6:
         return abc, {'action': 'preserve_full_score', 'original_seconds': round(original_s, 3),
                      'selected_seconds': round(original_s, 3), 'excerpt': False}
+    # A few seconds of overflow should not force loss of the entire song:
+    # first attempt a small, auditable BPM adjustment, capped at +8%.
+    tempo_fit = _fit_whole_score_by_tempo(abc, original_s, max_duration)
+    if tempo_fit is not None:
+        return tempo_fit
     # A specifically requested Chorus/Verse is better served by a real
     # section-matched excerpt than by automatically selecting the intro.
     try:

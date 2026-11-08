@@ -59,3 +59,13 @@ La build è stata verificata senza pesi con matrice dei selettori, simulazione d
 ## Codice sorgente e licenze
 
 Il parser e il compositore ABC riutilizzati da `Ornn8/yue2-cover` sono vendorizzati in `vendor/yue2_cover_main/` con la licenza Apache-2.0 originale. I modelli YuE2, SheetSage2 e tokenizer hanno licenze proprie, non incluse nello ZIP. Consulta le condizioni dei modelli e detieni i diritti necessari per i brani e i campioni vocali utilizzati.
+
+### Git and Python cache
+
+`.gitignore` recursively excludes `__pycache__/`, `*.pyc`, and `*.pyo`, also under vendor subdirectories. Pre-existing tracked cache files are removed from Git's index. The installation ZIP excludes `.git` and Python caches.
+
+### Duration overflow without cutting the song
+
+When the native ABC score is slightly longer than `max_duration`, the planner first tries a **tempo-only adjustment**. The new integer quarter-note BPM must be no more than **8% faster**, and the parser verifies that all symbolic notes, rests, bars, chord events, key changes and section order are unchanged. For example, 252 seconds at 60 BPM fits 240 seconds at 63 BPM, without dropping sections or Lyrics. The report records both BPM values and the exact percentage increase. If the 8% limit cannot be met (including integer BPM rounding), the existing section-aware excerpt selector is attempted; it may reject a genuinely impossible combination.
+
+Regression scripts are in `qa/` and can run without YuE2 weights: `python qa/test_tempo_fit.py` and `python qa/test_contract_matrix.py`.
